@@ -1,0 +1,14 @@
+body {
+  font-family: sans-serif;
+  background-image: url("./retro.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+#gameScreen {
+  margin-top: 10vh;
+  background-image: url("./background.jpg");
+  background-size: cover;
+  border-radius: 30px;
+  -webkit-box-shadow: 0px 1px 30px rgb(170, 209, 218), 0px -1px 60px rgba(50, 219, 255, 0.8), 0px 0px 100px rgba(50, 219, 255, 1), 0px 0px 90px rgba(50, 219, 255, 1);
+}
