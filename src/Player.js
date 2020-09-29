@@ -7,7 +7,14 @@ export default class Player extends GameObject{
   inputManager = window.inputManager;
   resourceManager = window.resourceManager;
 
-  speed = 10;
+  addPlayerBullet
+  canShoot = true;
+  shootCoolDownCounter = 0
+  shootCoolDownRate = 6
+  
+  gameController
+
+  speed = 8;
   bottomMargin =  32;
   size = {
     width: 64,
@@ -19,12 +26,31 @@ export default class Player extends GameObject{
     y:100,
   }
 
-  constructor() {
+  constructor(gameController) {
     super();
     this.size.width = 64;
     this.size.height = 64;
     this.pos.x = SCREEN.size.width / 2 - this.size.width / 2; 
     this.pos.y = SCREEN.size.height - this.size.height - this.bottomMargin;
+    this.gameController = gameController;
+  }
+
+  checkShootCoolDown() {
+    if (this.canShoot) return;
+    this.shootCoolDownCounter++
+    if (this.shootCoolDownCounter >= this.shootCoolDownRate){
+      this.shootCoolDownCounter = 0;
+      this.canShoot = true;
+    }
+  }
+
+
+  checkFire() {
+    if (!this.canShoot) return
+    if(this.inputManager.keyDowns.space) {
+      this.gameController.bullets.addPlayerBullet   (this.pos.x + this.size.width /2 , this.pos.y)
+      this.canShoot = false;
+    }
   }
 
   checkBounds() {
@@ -48,8 +74,10 @@ export default class Player extends GameObject{
 
   tick(deltaTime) {
     if (!this.correctState()) return;
+    this.checkFire();
     this.checkMovement()
     this.checkBounds();
+    this.checkShootCoolDown();
   }
 
   render(ctx) {

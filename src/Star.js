@@ -1,10 +1,10 @@
 import GameObject from './GameObject.js';
-import { SCREEN } from './constants.js'
+import { STATES, SCREEN } from './constants.js'
 import { randomIntBetween } from './utilities.js'
 
 export default class Star extends GameObject{
 
-
+  stateManager = window.stateManager
 
   constructor() {
     super();
@@ -18,11 +18,13 @@ export default class Star extends GameObject{
   }
 
   tick(deltaTime) {
+    if (!this.correctState()) return;
     this.move();
   
   } 
 
   render(ctx) {
+    if (!this.correctState()) return;
     ctx.fillStyle = "WHITE";
     ctx.beginPath();
     ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
@@ -44,6 +46,13 @@ export default class Star extends GameObject{
     this.speed = randomIntBetween(5, 9);
     this.size.width = this.speed / 3 ;
     this.size.height = this.speed / 3;
+  }
+
+  correctState() {
+    return (
+      this.stateManager.systemState === STATES.system.game
+      || this.stateManager.systemState === STATES.system.menu
+    )
   }
 
 }

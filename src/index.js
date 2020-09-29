@@ -1,10 +1,11 @@
 import InputManager from './InputManager.js';
 import { SCREEN, SPRITE_PATHS } from './constants.js'
-import StarField from './StarField.js';
-import ResourceManager from './ResourceManager.js';
-import Player from './Player.js';
+import Physics from './Physics.js';
+import GameController from './GameController.js'
+import ResourceManager from './ResourceManager.js';;
 import StateManager from './StateManager.js';
 import Menu from './Menu.js';
+import StarField from './StarField.js';
 
 let canvas = document.getElementById('gameScreen');
 let ctx = canvas.getContext('2d');
@@ -12,12 +13,11 @@ let ctx = canvas.getContext('2d');
 window.stateManager = new StateManager();
 window.inputManager = new InputManager();
 window.resourceManager = new ResourceManager();
+window.gameController = new GameController();
 
-let gameObjects = [ 
-  new Menu(),
-  new StarField(), 
-  new Player(),
-];
+const starField = new StarField();
+const menu = new Menu();
+const gameController = window.gameController;
 
 let lastTime = 0;
 
@@ -26,11 +26,15 @@ const clearScreen = (ctx) => {
 }
 
 const tick = (deltaTime) => {
-  gameObjects.forEach((o) => o.tick(deltaTime));
+  starField.tick(deltaTime);
+  menu.tick(deltaTime);
+  gameController.tick(deltaTime);
 }
 
 const render = (ctx) => {
-  gameObjects.forEach((o) => o.render(ctx));
+  starField.render(ctx)
+  menu.render(ctx);
+  gameController.render(ctx);
 }
 
 const gameLoop = (timestamp) => {

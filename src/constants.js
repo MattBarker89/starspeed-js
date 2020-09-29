@@ -11,11 +11,16 @@ export const KEYS = Object.freeze({
   left: 65,
   right: 68,
   space: 32,
+  enter: 13,
+  escape: 27,
 });
 
 export const SPRITE_PATHS = Object.freeze([
 './player.png',
+'./enemy.png',
+'./enemy-damage.png',
 './logo.png',
+'./player-bullet.png'
 ]);
 
 

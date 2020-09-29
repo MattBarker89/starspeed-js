@@ -35,6 +35,9 @@ export default class InputManager {
       case KEYS.space:
         this.keyDowns.space = true;
         break;
+      case KEYS.enter:
+        this.keyDowns.enter = true;
+          break;
       default:
         break;
     }
@@ -57,8 +60,11 @@ export default class InputManager {
       break;
       case KEYS.space:
         this.keyDowns.space = false; 
-        this.stateManager.systemState = STATES.system.game
         break;
+      case KEYS.enter:
+        this.keyDowns.enter = false;
+          this.stateManager.systemState = STATES.system.game; 
+          break;
       default:
         break;
     }
