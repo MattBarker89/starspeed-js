@@ -6,7 +6,7 @@ export default class StateManager {
   gameState;
 
   constructor() {
-    this.systemState = STATES.system.game
+    this.systemState = STATES.system.menu
     this.menuState = STATES.menu.main
     this.gameState = STATES.game.level1
   }

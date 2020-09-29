@@ -23,6 +23,11 @@ export const SPRITE_PATHS = Object.freeze([
 './player-bullet.png'
 ]);
 
+export const SOUND_PATHS = Object.freeze([
+  './shoot.wav',
+  ]);
+  
+
 
 export const STATES = Object.freeze({
   system: {

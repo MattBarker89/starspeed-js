@@ -1,12 +1,15 @@
 import { getKeyByValue } from './utilities.js'
+import { SPRITE_PATHS } from './constants.js'
 export default class ResourceManager {
 
   cache = {};
   pendingLoad = [];
   callBack;
 
+
   
-  loadSprites = (urls) =>  {
+  loadSprites = () =>  {
+    let urls = SPRITE_PATHS
     urls.forEach((url) => {
       let img = new Image();
       this.pendingLoad.push(url);

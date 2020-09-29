@@ -1,8 +1,8 @@
 import InputManager from './InputManager.js';
-import { SCREEN, SPRITE_PATHS } from './constants.js'
-import Physics from './Physics.js';
+import { SCREEN, SOUND_PATHS, SPRITE_PATHS } from './constants.js'
 import GameController from './GameController.js'
-import ResourceManager from './ResourceManager.js';;
+import ResourceManager from './ResourceManager.js';
+import SoundManager from './SoundManager.js';
 import StateManager from './StateManager.js';
 import Menu from './Menu.js';
 import StarField from './StarField.js';
@@ -13,6 +13,7 @@ let ctx = canvas.getContext('2d');
 window.stateManager = new StateManager();
 window.inputManager = new InputManager();
 window.resourceManager = new ResourceManager();
+window.soundManager = new SoundManager();
 window.gameController = new GameController();
 
 const starField = new StarField();
@@ -46,5 +47,8 @@ const gameLoop = (timestamp) => {
   requestAnimationFrame(gameLoop);
 }
 
-resourceManager.loadSprites(SPRITE_PATHS);
-resourceManager.onReady(gameLoop);
+
+resourceManager.loadSprites();
+resourceManager.onReady(gameLoop)
+
+

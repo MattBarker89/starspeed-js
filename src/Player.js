@@ -2,7 +2,8 @@ import GameObject from './GameObject.js';
 import { STATES, SCREEN } from './constants.js'
 import { randomIntBetween } from './utilities.js'
 
-export default class Player extends GameObject{
+export default class Player extends GameObject {
+  soundManager = window.soundManager;
   stateManager = window.stateManager;
   inputManager = window.inputManager;
   resourceManager = window.resourceManager;
@@ -10,7 +11,7 @@ export default class Player extends GameObject{
   addPlayerBullet
   canShoot = true;
   shootCoolDownCounter = 0
-  shootCoolDownRate = 6
+  shootCoolDownRate = 16  
   
   gameController
 
@@ -49,6 +50,7 @@ export default class Player extends GameObject{
     if (!this.canShoot) return
     if(this.inputManager.keyDowns.space) {
       this.gameController.bullets.addPlayerBullet   (this.pos.x + this.size.width /2 , this.pos.y)
+      this.soundManager.playShoot();
       this.canShoot = false;
     }
   }

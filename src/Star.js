@@ -4,6 +4,7 @@ import { randomIntBetween } from './utilities.js'
 
 export default class Star extends GameObject{
 
+  inputManager = window.inputManager;
   stateManager = window.stateManager
 
   constructor() {

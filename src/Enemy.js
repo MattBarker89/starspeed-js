@@ -1,9 +1,10 @@
 import GameObject from './GameObject.js';
 import { STATES, SCREEN } from './constants.js'
-import { randomIntBetween } from './utilities.js'
+import { randomIntBetween, uuid } from './utilities.js'
 
 export default class Enemy extends GameObject{
 
+  soundManager = window.soundManager;
   physics = window.physics;
   stateManager = window.stateManager
   resourceManager = window.resourceManager;
@@ -12,7 +13,9 @@ export default class Enemy extends GameObject{
   showDamage = false;
   topMargin =  32;
   direction = 0;
-  speed = 32;
+  speed = 6;
+  id;
+  health = 100;
 
   size = {
     width: 64,
@@ -28,10 +31,14 @@ export default class Enemy extends GameObject{
     super();
     this.pos.x = randomIntBetween(0, SCREEN.size.width - this.size.width)
     this.pos.y = 0;
-    this.speed = randomIntBetween(5, 9);
     this.gameController = gameController
     this.direction = randomIntBetween(0,1);
-    console.log(this.direction)
+    this.id = uuid();
+  }
+  
+  die = () => {
+    this.soundManager.playDie();
+    this.gameController.enemies.removeEnemy(this.id)
   }
 
   checkBounds = () => {
@@ -49,6 +56,10 @@ export default class Enemy extends GameObject{
 
   takeDamage = () => {
     this.showDamage = true; 
+    this.health -=  10;
+    this.soundManager.playHit();
+    if(this.health <= 0) this.die();
+  
   }
 
   checkBulletCollisions = () => {
@@ -62,7 +73,7 @@ export default class Enemy extends GameObject{
     this.checkBulletCollisions();
     this.move();
     this.checkBounds();
-  } 
+  } d 
 
   render(ctx) {
     if (!this.correctState()) return;

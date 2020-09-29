@@ -2,9 +2,12 @@ import GameObject from './GameObject.js'
 import { STATES } from './constants.js'
 import Star from './Star.js';
 export default class StarField extends GameObject {
+  
+
   stateManager = window.stateManager;
 
   stars = [];
+  
 
   constructor() {
     super();
