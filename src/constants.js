@@ -13,6 +13,7 @@ export const KEYS = Object.freeze({
   space: 32,
   enter: 13,
   escape: 27,
+  forwardSlash:191,
 });
 
 export const SPRITE_PATHS = Object.freeze([
@@ -20,14 +21,9 @@ export const SPRITE_PATHS = Object.freeze([
 './enemy.png',
 './enemy-damage.png',
 './logo.png',
-'./player-bullet.png'
+'./player-bullet.png',
+'./enemy-bullet.png',
 ]);
-
-export const SOUND_PATHS = Object.freeze([
-  './shoot.wav',
-  ]);
-  
-
 
 export const STATES = Object.freeze({
   system: {
@@ -43,6 +39,4 @@ export const STATES = Object.freeze({
   game:{
     level1: 0
   }
-
 })
-

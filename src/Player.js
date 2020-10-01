@@ -1,6 +1,5 @@
 import GameObject from './GameObject.js';
 import { STATES, SCREEN } from './constants.js'
-import { randomIntBetween } from './utilities.js'
 
 export default class Player extends GameObject {
   soundManager = window.soundManager;
@@ -36,6 +35,17 @@ export default class Player extends GameObject {
     this.gameController = gameController;
   }
 
+  die = () => {
+    this.soundManager.playPlayerDie();
+    this.gameController.gameOver();
+  }
+
+  checkBulletCollisions = () => {
+    if (this.gameController.physics.checkCollisionsWithEnemyBullets(this)) {
+      this.die()
+    }
+  }
+
   checkShootCoolDown() {
     if (this.canShoot) return;
     this.shootCoolDownCounter++
@@ -45,11 +55,10 @@ export default class Player extends GameObject {
     }
   }
 
-
   checkFire() {
     if (!this.canShoot) return
     if(this.inputManager.keyDowns.space) {
-      this.gameController.bullets.addPlayerBullet   (this.pos.x + this.size.width /2 , this.pos.y)
+      this.gameController.bullets.addPlayerBullet(this.pos.x + this.size.width /2 , this.pos.y)
       this.soundManager.playShoot();
       this.canShoot = false;
     }
@@ -76,14 +85,17 @@ export default class Player extends GameObject {
 
   tick(deltaTime) {
     if (!this.correctState()) return;
+    if (this.gameController.playerDead) return;
     this.checkFire();
-    this.checkMovement()
+    this.checkMovement();
     this.checkBounds();
     this.checkShootCoolDown();
+    this.checkBulletCollisions();
   }
 
   render(ctx) {
     if (!this.correctState()) return;
+    if (this.gameController.playerDead) return;
     ctx.beginPath();
     ctx.drawImage(this.resourceManager.get('./player.png'), this.pos.x, this.pos.y, this.size.width,this.size.height);
     ctx.beginPath();

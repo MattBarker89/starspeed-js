@@ -1,6 +1,6 @@
 import GameObject from './GameObject.js';
 import { STATES, SCREEN } from './constants.js'
-import { uuid } from './utilities.js'
+import { randomIntBetween, uuid } from './utilities.js'
 
 export default class PlayerBullet extends GameObject {
 
@@ -8,11 +8,9 @@ export default class PlayerBullet extends GameObject {
   stateManager = window.stateManager;
   inputManager = window.inputManager;
   resourceManager = window.resourceManager;
-  
-  gameController
+  speed = 4;
 
-  speed = 16 ;
-  
+
   constructor(x,y, gameController) {
     super();
     this.size.width = 8;
@@ -23,28 +21,29 @@ export default class PlayerBullet extends GameObject {
     this.gameController = gameController
   }
 
-  checkBounds = () => {
-    if (this.pos.y <= 0 - this.size.height) {
-      this.gameController.bullets.removePlayerBullet(this.id)
-    }
-  }
-
   tick(deltaTime) {
     this.move();
+    this.checkBounds();
   } 
 
   render(ctx) {
     if (!this.correctState()) return;
     ctx.beginPath();
-    ctx.drawImage(this.resourceManager.get('./player-bullet.png'), this.pos.x, this.pos.y, this.size.width,this.size.height);
+    ctx.drawImage(this.resourceManager.get('./enemy-bullet.png'), this.pos.x, this.pos.y, this.size.width,this.size.height);
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();
   }
 
+  checkBounds = () => {
+    if (this.pos.y >= SCREEN.size.height + this.size.height) {
+      this.gameController.bullets.removeEnemyBullet(this.id)
+    }
+  }
+
+
   move() {
-    this.pos.y -= this.speed;
-    this.checkBounds();
+    this.pos.y += this.speed;
   }
 
   correctState() {

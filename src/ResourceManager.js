@@ -5,8 +5,6 @@ export default class ResourceManager {
   cache = {};
   pendingLoad = [];
   callBack;
-
-
   
   loadSprites = () =>  {
     let urls = SPRITE_PATHS

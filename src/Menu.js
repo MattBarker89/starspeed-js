@@ -5,7 +5,6 @@ export default class StarField extends GameObject {
   stateManager = window.stateManager;
   resourceManager = window.resourceManager;
 
-
   flyInSpeed = 128
   logoTimeout = 1500;
   logoToggled = false;
@@ -13,7 +12,6 @@ export default class StarField extends GameObject {
   logoXFinish = 0 
   logoX = 0
   logoY= 64
-
 
   constructor() {
     super();
@@ -46,10 +44,6 @@ export default class StarField extends GameObject {
     if (this.optionsToggled && this.optionsX > -100 ) this.optionsX -= this.flyInSpeed;
     if (this.optionsX <= -100 ) this.creditsToggled = true;
     if (this.creditsToggled && this.creditsX < -100 ) this.creditsX += this.flyInSpeed;
-
-    
-
-
   }
 
   render(ctx) {
@@ -58,12 +52,14 @@ export default class StarField extends GameObject {
     ctx.beginPath();
     //ctx.fillRect(0, 0, SCREEN.size.width, SCREEN.size.height);
     ctx.drawImage(this.resourceManager.get('./logo.png'), this.logoX, this.logoY);
-    ctx.font = "20px Arial";
+    ctx.font = "20px arcade";
     ctx.fillStyle = "WHITE";
     ctx.fillText("Start", this.startX + SCREEN.size.width / 2 - 64, this.startY );
     ctx.fillText("High Scores", this.highScoresX + SCREEN.size.width / 2 - 64, this.highScoresY );
     ctx.fillText("Options", this.optionsX  + SCREEN.size.width / 2 - 64, this.optionsY );
     ctx.fillText("Credits", this.creditsX + SCREEN.size.width / 2 - 64, this.creditsY );
+
+    ctx.fillText("Start", 100,300)
     
     ctx.beginPath();
     ctx.fill();
@@ -75,6 +71,5 @@ export default class StarField extends GameObject {
       this.stateManager.systemState === STATES.system.menu
       )
   }
-  
 
 }

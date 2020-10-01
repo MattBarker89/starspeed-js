@@ -1,5 +1,5 @@
 import InputManager from './InputManager.js';
-import { SCREEN, SOUND_PATHS, SPRITE_PATHS } from './constants.js'
+import { SCREEN } from './constants.js'
 import GameController from './GameController.js'
 import ResourceManager from './ResourceManager.js';
 import SoundManager from './SoundManager.js';
@@ -46,7 +46,6 @@ const gameLoop = (timestamp) => {
   render(ctx);
   requestAnimationFrame(gameLoop);
 }
-
 
 resourceManager.loadSprites();
 resourceManager.onReady(gameLoop)

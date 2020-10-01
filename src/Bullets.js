@@ -1,6 +1,7 @@
 import GameObject from './GameObject.js'
 import { STATES } from './constants.js'
 import PlayerBullet from './PlayerBullet.js';
+import EnemyBullet from './EnemyBullet.js'
 export default class Bullets extends GameObject {
 
   physics = window.physics;
@@ -8,35 +9,42 @@ export default class Bullets extends GameObject {
 
   gameController
   playerBullets = [];
+  enemyBullets = []
 
   constructor(gameController) {
     super();
     this.playerBullets = []
+    this.enemyBullets = []
     this.gameController = gameController
   }
 
   tick(deltaTime) {
     if (!this.correctState()) return;
     this.playerBullets.forEach((bullet) => bullet.tick(deltaTime))
-    this.removeBullets();
+    this.enemyBullets.forEach((bullet) => bullet.tick(deltaTime))
   }
 
   render(ctx) {
     if (!this.correctState()) return;
     this.playerBullets.forEach((bullet) => bullet.render(ctx))
-
+    this.enemyBullets.forEach((bullet) => bullet.render(ctx))
   }
 
   addPlayerBullet = (x,y) => {
-    this.playerBullets.push(new PlayerBullet(x,y));
+    this.playerBullets.push(new PlayerBullet(x,y,this.gameController));
   }
 
   removePlayerBullet = (id) => {
+
     this.playerBullets = this.playerBullets.filter(b => b.id !== id);   
   }
 
-  removeBullets = () => {
-    this.playerBullets = this.playerBullets.filter(b => b.pos.y >= 0 );
+  addEnemyBullet = (x,y) => {
+    this.enemyBullets.push(new EnemyBullet(x,y, this.gameController));
+  }
+
+  removeEnemyBullet = (id) => {
+    this.enemyBullets = this.enemyBullets.filter(b => b.id !== id);   
   }
 
   correctState() {
@@ -45,5 +53,4 @@ export default class Bullets extends GameObject {
       )
   }
   
-
 }

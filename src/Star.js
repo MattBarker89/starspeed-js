@@ -9,19 +9,16 @@ export default class Star extends GameObject{
 
   constructor() {
     super();
-
     this.pos.x = randomIntBetween(0, SCREEN.size.width)
     this.pos.y = randomIntBetween(0, SCREEN.size.height)
     this.speed = randomIntBetween(5, 9);
     this.size.width = this.speed / 3 ;
     this.size.height = this.speed / 3;
-
   }
 
   tick(deltaTime) {
     if (!this.correctState()) return;
     this.move();
-  
   } 
 
   render(ctx) {

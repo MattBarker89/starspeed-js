@@ -13,15 +13,22 @@ export default class Enemy extends GameObject{
   showDamage = false;
   topMargin =  32;
   direction = 0;
-  speed = 6;
+  speed = 4;
+  moveInSpeed = this.speed * 2
   id;
-  health = 100;
+  health = 50;
+  shootIntervalLow = 10;
+  shootIntervalHigh = 40;
+  shootInterval; 
+  shootTimer = 0; 
+  movingIn = true;
 
   size = {
     width: 64,
     height: 64,
   }
 
+  startYPos = -this.size.height * 20 ;
   pos = {
     x: 100,
     y:100,
@@ -30,10 +37,30 @@ export default class Enemy extends GameObject{
   constructor(gameController) {
     super();
     this.pos.x = randomIntBetween(0, SCREEN.size.width - this.size.width)
-    this.pos.y = 0;
+    this.pos.y = this.startYPos;
     this.gameController = gameController
     this.direction = randomIntBetween(0,1);
     this.id = uuid();
+    this.resetShootInterval();
+  }
+
+  resetShootInterval = () => {
+    this.shootInterval = randomIntBetween(this.shootIntervalLow, this.shootIntervalHigh) * 10
+  }
+
+  checkShoot = () => {
+    if (this.movingIn) return;
+    this.shootTimer++
+    if(this.shootTimer >= this.shootInterval) {
+      this.shoot();
+      this.resetShootInterval();
+      this.shootTimer = 0;
+    }
+  }
+
+  shoot = () => {
+    this.soundManager.playEnemyShoot();
+    this.gameController.bullets.addEnemyBullet(this.pos.x + this.size.width /2 , this.pos.y + this.size.height )
   }
   
   die = () => {
@@ -43,15 +70,23 @@ export default class Enemy extends GameObject{
 
   checkBounds = () => {
     if (this.pos.x >= SCREEN.size.width - this.size.width) this.direction = 1
-    if (this.pos.x <= 0) this.direction = 0
+    if (this.pos.x <= 0) {
+      this.direction = 0
+    }
   }
 
   move = () => {
-    if (this.direction === 0) {
-      this.pos.x += this.speed;
-    } else if (this.direction === 1) { 
-      this.pos.x -= this.speed;
+    if(this.pos.y < this.topMargin - this.size.height / 2) {
+      this.pos.y += this.moveInSpeed;
+    } else {
+      this.movingIn = false;
+      if (this.direction === 0) {
+        this.pos.x += this.speed;
+      } else if (this.direction === 1) { 
+        this.pos.x -= this.speed;
+      }
     }
+
   }
 
   takeDamage = () => {
@@ -73,7 +108,8 @@ export default class Enemy extends GameObject{
     this.checkBulletCollisions();
     this.move();
     this.checkBounds();
-  } d 
+    this.checkShoot();
+  }
 
   render(ctx) {
     if (!this.correctState()) return;
@@ -93,10 +129,6 @@ export default class Enemy extends GameObject{
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();
-  }
-
-  move() {
-
   }
 
   correctState() {

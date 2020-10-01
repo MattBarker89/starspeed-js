@@ -1,5 +1,3 @@
-import GameController from './GameController.js';
-
 export default class Physics {
 
   gameController;
@@ -15,6 +13,18 @@ export default class Physics {
       if (this.hasCollided(a,b)) { 
         collisionDetected = true;
         this.gameController.bullets.removePlayerBullet(b.id)
+      }
+    })
+    return collisionDetected;
+  }
+
+  checkCollisionsWithEnemyBullets = (a) => { 
+    if(this.gameController.bullets.enemyBullets.length <= 0) return;
+    let collisionDetected = false;
+    this.gameController.bullets.enemyBullets.forEach((b) => {
+      if (this.hasCollided(a,b)) { 
+        collisionDetected = true;
+        this.gameController.bullets.removeEnemyBullet(b.id)
       }
     })
     return collisionDetected;
@@ -38,8 +48,6 @@ export default class Physics {
     return 
   } 
 
-
-
   tick(deltaTime) {
     if (!this.correctState()) return;
     this.checkCollisions()
@@ -61,5 +69,3 @@ export default class Physics {
   }
 
 }
-
-

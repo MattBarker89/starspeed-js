@@ -10,6 +10,7 @@ export default class InputManager {
     left: false,
     right: false,
     space: false,
+    forwardSlash: false,
   };
 
   constructor() {
@@ -38,6 +39,9 @@ export default class InputManager {
       case KEYS.enter:
         this.keyDowns.enter = true;
           break;
+      case KEYS.forwardSlash:
+        this.keyDowns.forwardSlash = true;
+        break;
       default:
         break;
     }
@@ -64,6 +68,9 @@ export default class InputManager {
       case KEYS.enter:
         this.keyDowns.enter = false;
           this.stateManager.systemState = STATES.system.game; 
+          break;
+      case KEYS.forwardSlash:
+        this.keyDowns.forwardSlash = false;
           break;
       default:
         break;

@@ -20,3 +20,8 @@ body {
 #PURPLE { 
   color: #f901a3
 }
+
+@font-face {
+  font-family: 'arcade';
+  src: url('./arcade.TTF');
+}
