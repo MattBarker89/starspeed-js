@@ -5,6 +5,7 @@ import ResourceManager from './ResourceManager.js';
 import SoundManager from './SoundManager.js';
 import StateManager from './StateManager.js';
 import Menu from './Menu.js';
+import Pause from './Pause.js';
 import StarField from './StarField.js';
 
 let canvas = document.getElementById('gameScreen');
@@ -18,6 +19,7 @@ window.gameController = new GameController();
 
 const starField = new StarField();
 const menu = new Menu();
+const pause = new Pause();
 const gameController = window.gameController;
 
 let lastTime = 0;
@@ -29,12 +31,14 @@ const clearScreen = (ctx) => {
 const tick = (deltaTime) => {
   starField.tick(deltaTime);
   menu.tick(deltaTime);
+  pause.tick(deltaTime);
   gameController.tick(deltaTime);
 }
 
 const render = (ctx) => {
   starField.render(ctx)
   menu.render(ctx);
+  pause.render(ctx);
   gameController.render(ctx);
 }
 

@@ -10,7 +10,7 @@ export default class Player extends GameObject {
   addPlayerBullet
   canShoot = true;
   shootCoolDownCounter = 0
-  shootCoolDownRate = 16  
+  shootCoolDownRate = 8;  
   
   gameController
 

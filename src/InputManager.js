@@ -10,8 +10,13 @@ export default class InputManager {
     left: false,
     right: false,
     space: false,
+    escape: false,
     forwardSlash: false,
   };
+
+  acknowledged = {
+    escape: false
+  } 
 
   constructor() {
     window.addEventListener("keydown", this.keyDown, false);
@@ -38,6 +43,10 @@ export default class InputManager {
         break;
       case KEYS.enter:
         this.keyDowns.enter = true;
+          break;
+      case KEYS.escape:
+          if (this.keyDowns.escape) return;
+          this.keyDowns.escape = true;
           break;
       case KEYS.forwardSlash:
         this.keyDowns.forwardSlash = true;
@@ -68,6 +77,10 @@ export default class InputManager {
       case KEYS.enter:
         this.keyDowns.enter = false;
           this.stateManager.systemState = STATES.system.game; 
+          break;
+      case KEYS.escape:
+          this.keyDowns.escape = false;
+          this.acknowledged.escape = false;
           break;
       case KEYS.forwardSlash:
         this.keyDowns.forwardSlash = false;

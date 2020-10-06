@@ -4,7 +4,9 @@ import Bullets from './Bullets.js';
 import Physics from './Physics.js';
 import Enemies from './Enemies.js';
 import Shield from './Shield.js';
-import Enemy from './Enemy.js';
+import ParticleEmmiter from './ParticleEmitter.js';
+import ParticleEmitter from './ParticleEmitter.js';
+
 
 export default class GameController {
 
@@ -23,7 +25,8 @@ export default class GameController {
   enemies;
   player;
   shield;
-
+  particleEmitter;
+  particleEmitter2;
 
   constructor() {
     this.physics = new Physics(this);
@@ -31,6 +34,9 @@ export default class GameController {
     this.enemies = new Enemies(this);
     this.player = new Player(this);
     this.shield = new Shield(this);
+    this.particleEmitter = new ParticleEmmiter(this);
+    this.particleEmitter2 = new ParticleEmmiter(this);
+
     this.enemies.addEnemies(4);
   }
 
@@ -40,10 +46,10 @@ export default class GameController {
     this.enemies = new Enemies(this);
     this.player = new Player(this);
     this.shield = new Shield(this);
+    this.particleEmitter = new ParticleEmitter(this);
     this.enemies.addEnemies(4);
   }
 
-  
   checkForRespawn = () => {
     if (!this.playerDead) return;
     this.respawnCounter++;
@@ -64,8 +70,8 @@ export default class GameController {
     this.enemies.tick(deltaTime)
     this.player.tick(deltaTime)
     this.shield.tick(deltaTime);
+    this.particleEmitter.tick(deltaTime);
     this.checkForRespawn(deltaTime);
-
   }
 
   render(ctx) {
@@ -74,14 +80,14 @@ export default class GameController {
     this.enemies.render(ctx);
     this.player.render(ctx)
     this.shield.render(ctx);
+    this.particleEmitter.render(ctx);
   }
 
   correctState() {
     return (
-      this.stateManager.systemState === STATES.system.game
+      this.stateManager.systemState === STATES.system.game 
+
       )
   }
 
 }
-
-

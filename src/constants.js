@@ -38,5 +38,9 @@ export const STATES = Object.freeze({
   },
   game:{
     level1: 0
+  },
+  pauseState:{
+    unpaused: 0,
+    paused: 1,
   }
 })

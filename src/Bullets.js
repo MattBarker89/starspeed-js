@@ -35,7 +35,6 @@ export default class Bullets extends GameObject {
   }
 
   removePlayerBullet = (id) => {
-
     this.playerBullets = this.playerBullets.filter(b => b.id !== id);   
   }
 
