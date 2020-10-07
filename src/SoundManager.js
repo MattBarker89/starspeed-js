@@ -4,7 +4,8 @@ export default class SoundManager {
   soundEnabled;
 
   constructor(){
-    this.soundEnabled = true;
+    this.soundEnabled = true
+    ;
   }
 
   hit = new Audio("./hit.wav");
@@ -13,6 +14,10 @@ export default class SoundManager {
   playerDie = new Audio("./player-die.wav");
   pause = new Audio("./pause.wav");
   unpause = new Audio("./unpause.wav");
+  shieldUp1 = new Audio("./shield-up-1.wav");
+  shieldUp2 = new Audio("./shield-up-2.wav");
+  shieldUp3 = new Audio("./shield-up-3.wav");
+  shieldOff = new Audio("./shield-off.wav");
 
   playShoot = () => {
     if (!this.soundEnabled) return;
@@ -44,11 +49,32 @@ export default class SoundManager {
     this.unpause.play();
   }
 
-
   playEnemyShoot = () => {
     if (!this.soundEnabled) return;
     this.enemyShoot.play();
-  }    
+  }
+
+  playShieldUp1 = () => {
+    if (!this.soundEnabled) return;
+    this.shieldUp1.play();
+  }
+  
+  playShieldUp2 = () => {
+    if (!this.soundEnabled) return;
+    this.shieldUp2.play();
+  }
+  
+  playShieldUp3 = () => {
+    if (!this.soundEnabled) return;
+    this.shieldUp3.play();
+  }
+
+  playShieldOff = () => {
+    if (!this.soundEnabled) return;
+    this.shieldOff.play();
+  }
+
+
 }
 
 

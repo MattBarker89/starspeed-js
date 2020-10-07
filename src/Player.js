@@ -1,4 +1,5 @@
 import GameObject from './GameObject.js';
+import Shield from './Shield.js'
 import { STATES, SCREEN } from './constants.js'
 
 export default class Player extends GameObject {
@@ -6,6 +7,8 @@ export default class Player extends GameObject {
   stateManager = window.stateManager;
   inputManager = window.inputManager;
   resourceManager = window.resourceManager;
+
+  shield
 
   addPlayerBullet
   canShoot = true;
@@ -33,6 +36,7 @@ export default class Player extends GameObject {
     this.pos.x = SCREEN.size.width / 2 - this.size.width / 2; 
     this.pos.y = SCREEN.size.height - this.size.height - this.bottomMargin;
     this.gameController = gameController;
+    this.shield = new Shield(this.gameController)
   }
 
   die = () => {
@@ -56,7 +60,7 @@ export default class Player extends GameObject {
   }
 
   checkFire() {
-    if (!this.canShoot) return
+    if (!this.canShoot || this.shield.shieldUp) return
     if(this.inputManager.keyDowns.space) {
       this.gameController.bullets.addPlayerBullet(this.pos.x + this.size.width /2 , this.pos.y)
       this.soundManager.playShoot();
@@ -86,6 +90,7 @@ export default class Player extends GameObject {
   tick(deltaTime) {
     if (!this.correctState()) return;
     if (this.gameController.playerDead) return;
+    this.shield.tick(deltaTime)
     this.checkFire();
     this.checkMovement();
     this.checkBounds();
@@ -96,6 +101,7 @@ export default class Player extends GameObject {
   render(ctx) {
     if (!this.correctState()) return;
     if (this.gameController.playerDead) return;
+    this.shield.render(ctx);
     ctx.beginPath();
     ctx.drawImage(this.resourceManager.get('./player.png'), this.pos.x, this.pos.y, this.size.width,this.size.height);
     ctx.beginPath();
