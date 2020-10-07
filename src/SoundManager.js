@@ -4,8 +4,7 @@ export default class SoundManager {
   soundEnabled;
 
   constructor(){
-    this.soundEnabled = true
-    ;
+    this.soundEnabled = true;
   }
 
   hit = new Audio("./hit.wav");
@@ -18,6 +17,7 @@ export default class SoundManager {
   shieldUp2 = new Audio("./shield-up-2.wav");
   shieldUp3 = new Audio("./shield-up-3.wav");
   shieldOff = new Audio("./shield-off.wav");
+  shieldHit = new Audio("./shield-hit.wav");
 
   playShoot = () => {
     if (!this.soundEnabled) return;
@@ -74,6 +74,10 @@ export default class SoundManager {
     this.shieldOff.play();
   }
 
+  playShieldHit = () => {
+    if (!this.soundEnabled) return;
+    this.shieldHit.play();
+  }
 
 }
 

@@ -12,7 +12,7 @@ export default class Shield extends GameObject {
 
   shieldUp = false;
   shieldPoweringUp = false;
-  shieldPowerUpDelay = 16
+  shieldPowerUpDelay = 12
   sheildPowerUpCounter = 0;
 
   //4 //8 //16
@@ -33,7 +33,7 @@ export default class Shield extends GameObject {
       color:'rgba(255, 204, 0, 0.2)',
     },
     two: {
-      width: 3,
+      width: 2,
       margin: 6,
       color:'rgba(255, 204, 255, 0.4)',
     },

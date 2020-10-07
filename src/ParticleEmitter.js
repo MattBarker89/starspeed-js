@@ -9,6 +9,8 @@ export default class ParticleEmitter extends GameObject{
   
   particles = [];
 
+  gameObject
+
   particleTimeOut = 1
   particleCounter = 0
 
@@ -17,8 +19,9 @@ export default class ParticleEmitter extends GameObject{
     density: 50,
   }
 
-  constructor() {
+  constructor(gameObject) {
     super();
+    this.gameObject = gameObject
   }
 
   tick(deltaTime) {

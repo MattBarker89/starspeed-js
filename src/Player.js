@@ -1,5 +1,6 @@
 import GameObject from './GameObject.js';
 import Shield from './Shield.js'
+import ParticleEmitter from './ParticleEmitter.js'
 import { STATES, SCREEN } from './constants.js'
 
 export default class Player extends GameObject {
@@ -9,6 +10,7 @@ export default class Player extends GameObject {
   resourceManager = window.resourceManager;
 
   shield
+  particleEmmiter
 
   addPlayerBullet
   canShoot = true;
@@ -37,6 +39,7 @@ export default class Player extends GameObject {
     this.pos.y = SCREEN.size.height - this.size.height - this.bottomMargin;
     this.gameController = gameController;
     this.shield = new Shield(this.gameController)
+    this.particleEmmiter = new ParticleEmitter(this);
   }
 
   die = () => {
@@ -46,8 +49,12 @@ export default class Player extends GameObject {
 
   checkBulletCollisions = () => {
     if (this.gameController.physics.checkCollisionsWithEnemyBullets(this)) {
-      this.die()
-    }
+      if(!this.shield.shieldUp) {
+        this.die()
+      } else {
+        this.soundManager.playShieldHit();
+      }
+    } 
   }
 
   checkShootCoolDown() {
@@ -91,6 +98,7 @@ export default class Player extends GameObject {
     if (!this.correctState()) return;
     if (this.gameController.playerDead) return;
     this.shield.tick(deltaTime)
+    this.particleEmmiter.tick(deltaTime)
     this.checkFire();
     this.checkMovement();
     this.checkBounds();
@@ -102,6 +110,7 @@ export default class Player extends GameObject {
     if (!this.correctState()) return;
     if (this.gameController.playerDead) return;
     this.shield.render(ctx);
+    this.particleEmmiter.render(ctx);
     ctx.beginPath();
     ctx.drawImage(this.resourceManager.get('./player.png'), this.pos.x, this.pos.y, this.size.width,this.size.height);
     ctx.beginPath();

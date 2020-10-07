@@ -3,9 +3,6 @@ import Player from './Player.js';
 import Bullets from './Bullets.js';
 import Physics from './Physics.js';
 import Enemies from './Enemies.js';
-import ParticleEmmiter from './ParticleEmitter.js';
-import ParticleEmitter from './ParticleEmitter.js';
-
 
 export default class GameController {
 
@@ -23,16 +20,12 @@ export default class GameController {
   bullets;
   enemies;
   player;
-  particleEmitter;
-  particleEmitter2;
 
   constructor() {
     this.physics = new Physics(this);
     this.bullets = new Bullets(this);
     this.enemies = new Enemies(this);
     this.player = new Player(this);
-    this.particleEmitter = new ParticleEmmiter(this);
-    this.particleEmitter2 = new ParticleEmmiter(this);
 
     this.enemies.addEnemies(4);
   }
@@ -42,7 +35,6 @@ export default class GameController {
     this.bullets = new Bullets(this);
     this.enemies = new Enemies(this);
     this.player = new Player(this);
-    this.particleEmitter = new ParticleEmitter(this);
     this.enemies.addEnemies(4);
   }
 
@@ -63,9 +55,8 @@ export default class GameController {
   tick(deltaTime) {
     if (!this.correctState()) return;
     this.bullets.tick(deltaTime)
-   // this.enemies.tick(deltaTime)
+    this.enemies.tick(deltaTime)
     this.player.tick(deltaTime)
-    this.particleEmitter.tick(deltaTime);
     this.checkForRespawn(deltaTime);
   }
 
@@ -74,13 +65,11 @@ export default class GameController {
     this.bullets.render(ctx)
     this.enemies.render(ctx);
     this.player.render(ctx)
-    this.particleEmitter.render(ctx);
   }
 
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game 
-
       )
   }
 

@@ -12,23 +12,25 @@ export default class Particle extends GameObject{
   id;
   settings = {
     particleSize: 2,
-    startingX: SCREEN.size.width / 2,
-    startingY: SCREEN.size.height - 30,
-    gravity: 0.7  ,
-    maxLife: 10
+    startingX: 0,
+    startingY: 0,
+    gravity: 0.7,
+    maxLife: 100,
   }
 
   constructor(particleEmitter) {
     super();
     this.particleEmitter = particleEmitter;
+    this.settings.startingX = 
+      this.particleEmitter.gameObject.pos.x + 
+      this.particleEmitter.gameObject.size.width / 2,
+    this.settings.startingY = 
+      this.particleEmitter.gameObject.pos.y +
+      this.particleEmitter.gameObject.size.height,
     this.pos.x = this.settings.startingX;
     this.pos.y = this.settings.startingY;
     this.vx = randomIntBetween(-0.8, 0.8)
     this.vy = randomIntBetween(0, 2)
-
-
-
-
     // this.vx = Math.random() * 20 - 10; left / right
     // this.vy = Math.random() * 20 - 5; high / low
 
