@@ -4,7 +4,7 @@ export default class SoundManager {
   soundEnabled;
 
   constructor(){
-    this.soundEnabled = true;
+    this.soundEnabled = false;
   }
 
   hit = new Audio("./hit.wav");
