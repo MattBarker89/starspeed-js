@@ -50,7 +50,6 @@ export default class StarField extends GameObject {
     if (!this.correctState()) return;
     ctx.fillStyle = "BLACK";
     ctx.beginPath();
-    //ctx.fillRect(0, 0, SCREEN.size.width, SCREEN.size.height);
     ctx.drawImage(this.resourceManager.get('./logo.png'), this.logoX, this.logoY);
     ctx.font = "20px arcade";
     ctx.fillStyle = "WHITE";
@@ -58,9 +57,7 @@ export default class StarField extends GameObject {
     ctx.fillText("High Scores", this.highScoresX + SCREEN.size.width / 2 - 64, this.highScoresY );
     ctx.fillText("Options", this.optionsX  + SCREEN.size.width / 2 - 64, this.optionsY );
     ctx.fillText("Credits", this.creditsX + SCREEN.size.width / 2 - 64, this.creditsY );
-
     ctx.fillText("Start", 100,300)
-    
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();

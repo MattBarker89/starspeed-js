@@ -22,6 +22,8 @@ export default class Enemy extends GameObject{
   shootInterval; 
   shootTimer = 0; 
   movingIn = true;
+  killPoints = 50;
+  hitPoints = 5;
 
   size = {
     width: 64,
@@ -66,6 +68,7 @@ export default class Enemy extends GameObject{
   die = () => {
     this.soundManager.playDie();
     this.gameController.enemies.removeEnemy(this.id)
+    this.stateManager.score.increaseCurrentScore(this.killPoints);
   }
 
   checkBounds = () => {
@@ -93,6 +96,8 @@ export default class Enemy extends GameObject{
     this.showDamage = true; 
     this.health -=  10;
     this.soundManager.playHit();
+    this.stateManager.score.increaseCurrentScore(this.hitPoints);
+    this.stateManager.score.increaseShotsHit();
     if(this.health <= 0) this.die();
   
   }

@@ -72,8 +72,9 @@ export default class Player extends GameObject {
       this.gameController.bullets.addPlayerBullet(this.pos.x + this.size.width /2 , this.pos.y)
       this.soundManager.playShoot();
       this.canShoot = false;
+      this.stateManager.score.increaseShotsFired();
     }
-  }
+  } 
 
   checkBounds() {
     if(this.pos.x <= 0) {

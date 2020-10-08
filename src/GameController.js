@@ -3,6 +3,7 @@ import Player from './Player.js';
 import Bullets from './Bullets.js';
 import Physics from './Physics.js';
 import Enemies from './Enemies.js';
+import Hud from './Hud.js'
 
 export default class GameController {
 
@@ -20,12 +21,14 @@ export default class GameController {
   bullets;
   enemies;
   player;
+  hud
 
   constructor() {
     this.physics = new Physics(this);
     this.bullets = new Bullets(this);
     this.enemies = new Enemies(this);
     this.player = new Player(this);
+    this.hud = new Hud(this);
 
     this.enemies.addEnemies(4);
   }
@@ -35,6 +38,7 @@ export default class GameController {
     this.bullets = new Bullets(this);
     this.enemies = new Enemies(this);
     this.player = new Player(this);
+    this.hud = new Hud(this);
     this.enemies.addEnemies(4);
   }
 
@@ -57,6 +61,7 @@ export default class GameController {
     this.bullets.tick(deltaTime)
     this.enemies.tick(deltaTime)
     this.player.tick(deltaTime)
+    this.hud.tick(deltaTime)
     this.checkForRespawn(deltaTime);
   }
 
@@ -65,6 +70,7 @@ export default class GameController {
     this.bullets.render(ctx)
     this.enemies.render(ctx);
     this.player.render(ctx)
+    this.hud.render(ctx)
   }
 
   correctState() {
