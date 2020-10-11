@@ -44,7 +44,7 @@ export default class Player extends GameObject {
 
   die = () => {
     this.soundManager.playPlayerDie();
-    this.gameController.gameOver();
+    this.gameController.loseLife();
   }
 
   checkBulletCollisions = () => {

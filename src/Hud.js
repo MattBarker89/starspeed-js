@@ -6,6 +6,7 @@ export default class Hud extends GameObject{
   inputManager = window.inputManager;
   stateManager = window.stateManager
 
+  playerLives;
   score
   shotsFired;
   shotsHit;
@@ -13,6 +14,7 @@ export default class Hud extends GameObject{
 
   constructor() {
     super();
+    this.playerLives = this.stateManager.playerLives;
     this.score = this.stateManager.score.currentScore;
     this.shotsFired = this.stateManager.score.shotsFired;
     this.shotsHit = this.stateManager.score.shotsHit;
@@ -21,6 +23,7 @@ export default class Hud extends GameObject{
 
   tick(deltaTime) {
     if (!this.correctState()) return;
+    this.playerLives = this.stateManager.playerLives;
     this.score = this.stateManager.score.currentScore;
     this.score = this.stateManager.score.currentScore;
     this.shotsFired = this.stateManager.score.shotsFired;
@@ -33,7 +36,7 @@ export default class Hud extends GameObject{
     ctx.beginPath();
     ctx.font = "16px retrobound";
     ctx.fillStyle = "#f901a3";
-    ctx.fillText(`Lives:  3`, 32, 32);
+    ctx.fillText(`Lives:  ${this.playerLives}`, 32, 32);
     ctx.fillText(`Score: ${this.score}`, 32, 55);
     ctx.fillText(`Shots Fired: ${this.shotsFired}`, 32, 76);
     ctx.fillText(`Shots Hit: ${this.shotsHit}`, 32, 99);

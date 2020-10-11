@@ -18,7 +18,7 @@ export default class Enemy extends GameObject{
   id;
   health = 50;
   shootIntervalLow = 10;
-  shootIntervalHigh = 40;
+  shootIntervalHigh = 12;
   shootInterval; 
   shootTimer = 0; 
   movingIn = true;
