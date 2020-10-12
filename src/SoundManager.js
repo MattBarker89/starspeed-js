@@ -4,7 +4,7 @@ export default class SoundManager {
   soundEnabled;
 
   constructor(){
-    this.soundEnabled = false;
+    this.soundEnabled = true;
   }
 
   hit = new Audio("./hit.wav");
@@ -18,6 +18,8 @@ export default class SoundManager {
   shieldUp3 = new Audio("./shield-up-3.wav");
   shieldOff = new Audio("./shield-off.wav");
   shieldHit = new Audio("./shield-hit.wav");
+  menuSelect = new Audio("./menu-select.wav");
+  menuActivate = new Audio("./menu-activate.wav");
 
   playShoot = () => {
     if (!this.soundEnabled) return;
@@ -78,6 +80,17 @@ export default class SoundManager {
     if (!this.soundEnabled) return;
     this.shieldHit.play();
   }
+
+  playMenuSelect = () => {
+    if (!this.soundEnabled) return;
+    this.menuSelect.play();
+  }
+
+  playMenuActivate = () => {
+    if (!this.soundEnabled) return;
+    this.menuActivate.play();
+  }
+  
 
 }
 

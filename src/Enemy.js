@@ -17,8 +17,8 @@ export default class Enemy extends GameObject{
   moveInSpeed = this.speed * 2
   id;
   health = 50;
-  shootIntervalLow = 10;
-  shootIntervalHigh = 12;
+  shootIntervalLow = 12;
+  shootIntervalHigh = 18;
   shootInterval; 
   shootTimer = 0; 
   movingIn = true;
@@ -139,6 +139,8 @@ export default class Enemy extends GameObject{
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver
     )
   }
 

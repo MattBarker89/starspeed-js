@@ -65,6 +65,8 @@ export default class Physics {
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver
     )
   }
 

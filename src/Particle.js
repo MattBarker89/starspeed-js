@@ -61,6 +61,8 @@ export default class Particle extends GameObject{
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver
     )
   }
 

@@ -1,5 +1,6 @@
 import GameObject from './GameObject.js';
 import Shield from './Shield.js'
+import PowerUpMeter from './PowerUpMeter.js'
 import ParticleEmitter from './ParticleEmitter.js'
 import { STATES, SCREEN } from './constants.js'
 
@@ -10,6 +11,7 @@ export default class Player extends GameObject {
   resourceManager = window.resourceManager;
 
   shield
+  powerUpMeter
   particleEmmiter
 
   addPlayerBullet
@@ -39,6 +41,7 @@ export default class Player extends GameObject {
     this.pos.y = SCREEN.size.height - this.size.height - this.bottomMargin;
     this.gameController = gameController;
     this.shield = new Shield(this.gameController)
+    this.powerUpMeter = new PowerUpMeter(this.gameController)
     this.particleEmmiter = new ParticleEmitter(this);
   }
 
@@ -99,6 +102,7 @@ export default class Player extends GameObject {
     if (!this.correctState()) return;
     if (this.gameController.playerDead) return;
     this.shield.tick(deltaTime)
+    this.powerUpMeter.tick(deltaTime)
     this.particleEmmiter.tick(deltaTime)
     this.checkFire();
     this.checkMovement();
@@ -114,6 +118,7 @@ export default class Player extends GameObject {
     this.particleEmmiter.render(ctx);
     ctx.beginPath();
     ctx.drawImage(this.resourceManager.get('./player.png'), this.pos.x, this.pos.y, this.size.width,this.size.height);
+    this.powerUpMeter.render(ctx)
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();
@@ -122,6 +127,8 @@ export default class Player extends GameObject {
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver
       )
   }
 

@@ -51,13 +51,18 @@ export default class StarField extends GameObject {
     ctx.fillStyle = "BLACK";
     ctx.beginPath();
     ctx.drawImage(this.resourceManager.get('./logo.png'), this.logoX, this.logoY);
-    ctx.font = "20px arcade";
+    ctx.font = "24px retrobound";
+    ctx.fillStyle = "#f901a3";
+
+    //ctx.fillText("Start", this.startX + SCREEN.size.width / 2 - 64, this.startY );
+    // ctx.fillText("High Scores", this.highScoresX + SCREEN.size.width / 2 - 64, this.highScoresY );
+    // ctx.fillText("Options", this.optionsX  + SCREEN.size.width / 2 - 64, this.optionsY );
+    // ctx.fillText("Credits", this.creditsX + SCREEN.size.width / 2 - 64, this.creditsY );
+    if (this.logoX >= 80) ctx.fillText("START", 278,300)
     ctx.fillStyle = "WHITE";
-    ctx.fillText("Start", this.startX + SCREEN.size.width / 2 - 64, this.startY );
-    ctx.fillText("High Scores", this.highScoresX + SCREEN.size.width / 2 - 64, this.highScoresY );
-    ctx.fillText("Options", this.optionsX  + SCREEN.size.width / 2 - 64, this.optionsY );
-    ctx.fillText("Credits", this.creditsX + SCREEN.size.width / 2 - 64, this.creditsY );
-    ctx.fillText("Start", 100,300)
+    if (this.logoX >= 80) ctx.fillText("OPTIONS", 264,350)
+    if (this.logoX >= 80) ctx.fillText("CREDITS", 264,400)
+
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();

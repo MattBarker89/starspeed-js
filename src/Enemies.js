@@ -32,13 +32,16 @@ export default class Enemies extends GameObject {
   }
 
   removeEnemy = (id) => {
-    this.enemies = this.enemies.filter(b => b.id !== id);   
+    this.enemies = this.enemies.filter(b => b.id !== id);
+    this.enemies.push(new Enemy(this.gameController));   
   }
 
 
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver
       )
   }
 

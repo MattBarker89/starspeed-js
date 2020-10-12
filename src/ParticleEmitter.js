@@ -49,6 +49,8 @@ export default class ParticleEmitter extends GameObject{
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver && !this.gameObject.shield.shieldUp
     )
   }
 

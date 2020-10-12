@@ -32,8 +32,7 @@ export default class GameController {
     this.player = new Player(this);
     this.hud = new Hud(this);
     this.gameOver  = new GameOver(this)
-
-    this.enemies.addEnemies(4);
+    this.enemies.addEnemies(8);
   }
 
   reStart = () => {
@@ -41,9 +40,8 @@ export default class GameController {
     this.bullets = new Bullets(this);
     this.enemies = new Enemies(this);
     this.player = new Player(this);
-    this.gameOver  = new GameOver(this)
     this.hud = new Hud(this);
-    this.enemies.addEnemies(4);
+    this.enemies.addEnemies(8);
   }
 
   checkForRespawn = () => {
@@ -88,7 +86,7 @@ export default class GameController {
 
   correctState() {
     return (
-      this.stateManager.systemState === STATES.system.game 
+      this.stateManager.systemState === STATES.system.game
       )
   }
 

@@ -12,7 +12,7 @@ export default class Shield extends GameObject {
 
   shieldUp = false;
   shieldPoweringUp = false;
-  shieldPowerUpDelay = 12
+  shieldPowerUpDelay = 6
   sheildPowerUpCounter = 0;
 
   //4 //8 //16
@@ -106,7 +106,6 @@ export default class Shield extends GameObject {
     if (this.gameController.playerDead) return;
     ctx.beginPath();
     ctx.shadowBlur=10
-    ctx.strok;
     ctx.strokeStyle = this.currentParam.color;
     ctx.shadowColor="#36bbf5";
     ctx.lineWidth = this.currentParam.width;
@@ -125,6 +124,8 @@ export default class Shield extends GameObject {
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver
       )
   }
 

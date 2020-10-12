@@ -11,12 +11,12 @@ export default class StateManager {
   playerlives;
 
   constructor() {
-    this.systemState = STATES.system.game
+    this.systemState = STATES.system.menu
     this.menuState = STATES.menu.main
     this.gameState = STATES.game.level1
     this.score = new Score();
     this.highScores = new HighScores();
-    this.playerLives = 1;
+    this.playerLives = 3;
   }
 
   resetStates = () => {
@@ -25,7 +25,7 @@ export default class StateManager {
     this.gameState = STATES.game.level1
     this.score = new Score();
     this.highScores = new HighScores();
-    this.playerLives = 1;
+    this.playerLives = 3;
   }
   
 }

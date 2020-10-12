@@ -10,12 +10,16 @@ export default class InputManager {
     left: false,
     right: false,
     space: false,
+    enter: false,
     escape: false,
     forwardSlash: false,
   };
 
   acknowledged = {
-    escape: false
+    up: false,
+    down: false,
+    enter: false,
+    escape: false,
   } 
 
   constructor() {
@@ -61,9 +65,11 @@ export default class InputManager {
     switch (keyCode) {
       case KEYS.up:
         this.keyDowns.up = false;
+        this.acknowledged.up = false;
       break;
       case KEYS.down:
         this.keyDowns.down = false;
+        this.acknowledged.down = false;
       break;
       case KEYS.left:
         this.keyDowns.left = false;
@@ -76,6 +82,7 @@ export default class InputManager {
         break;
       case KEYS.enter:
         this.keyDowns.enter = false;
+        this.acknowledged.enter = false;
           this.stateManager.systemState = STATES.system.game; 
           break;
       case KEYS.escape:

@@ -8,7 +8,7 @@ export default class PlayerBullet extends GameObject {
   stateManager = window.stateManager;
   inputManager = window.inputManager;
   resourceManager = window.resourceManager;
-  speed = 4;
+  speed = 8;
 
 
   constructor(x,y, gameController) {
@@ -49,6 +49,8 @@ export default class PlayerBullet extends GameObject {
   correctState() {
     return (
       this.stateManager.systemState === STATES.system.game
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver
       )
   }
 

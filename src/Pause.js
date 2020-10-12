@@ -40,12 +40,12 @@ export default class Pause extends GameObject {
     ctx.fillStyle = "BLACK";
     ctx.beginPath();
     ctx.fillRect(0, 0, SCREEN.size.width, SCREEN.size.height);
-    ctx.font = "30px arcade";
+    ctx.font = "32px retrobound";
     ctx.fillStyle = "WHITE";
-    ctx.fillText("Game Paused", 210,200)
-    ctx.font = "20px arcade";
-    ctx.fillText("Quit To Menu", 210,300)
-    ctx.fillText("Resume", 210,350)
+    ctx.fillText("GAME PAUSED", 232,200)
+    ctx.font = "24px retrobound";
+    ctx.fillText("RESUME", 280,310)
+    ctx.fillText("QUIT", 290,360)
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();
@@ -53,7 +53,9 @@ export default class Pause extends GameObject {
 
   correctState() {
     return (
-      this.stateManager.systemState !== STATES.system.menu
+      this.stateManager.systemState !== STATES.system.menu 
+      &&
+      this.stateManager.gameState !== STATES.game.gameOver
       )
   }
 
