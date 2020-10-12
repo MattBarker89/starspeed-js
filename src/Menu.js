@@ -5,13 +5,14 @@ export default class StarField extends GameObject {
   stateManager = window.stateManager;
   resourceManager = window.resourceManager;
 
-  flyInSpeed = 128
+  flyInSpeed = 128;
   logoTimeout = 1500;
   logoToggled = false;
-  logoXStart = -500
-  logoXFinish = 0 
-  logoX = 0
-  logoY= 64
+  logoXStart = -500;
+  logoXFinish = 0 ;
+  logoX = 0;
+  logoY= 64;
+  nameFontSize = 14;
 
   constructor() {
     super();
@@ -62,6 +63,8 @@ export default class StarField extends GameObject {
     ctx.fillStyle = "WHITE";
     if (this.logoX >= 80) ctx.fillText("OPTIONS", 264,350)
     if (this.logoX >= 80) ctx.fillText("CREDITS", 264,400)
+    ctx.font = "18px retrobound";
+    if (this.logoX >= 80) ctx.fillText("BY MATT BARKER!", 242, 600);
 
     ctx.beginPath();
     ctx.fill();

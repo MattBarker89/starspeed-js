@@ -39,12 +39,12 @@ export default class PowerUpMeter extends GameObject{
     ctx.beginPath();
     ctx.lineWidth = 3
     ctx.shadowBlur=10
-    ctx.shadowColor="#36bbf5";
+    ctx.shadowColor="WHITE";
     ctx.strokeStyle = "WHITE";
-    ctx.strokeRect(32,SCREEN.size.height - this.maxLevel - 32, 16, this.maxLevel)
+    ctx.strokeRect(32,SCREEN.size.height - this.maxLevel - 32, 8, this.maxLevel)
     ctx.stroke();
     ctx.fillStyle = "#36bbf5" 
-    ctx.fillRect(32,SCREEN.size.height -  this.maxLevel - 32, 16,  this.maxLevel - this.currentLevel);
+    ctx.fillRect(32,SCREEN.size.height -  this.maxLevel - 32, 8,  this.maxLevel);
     ctx.shadowBlur = 0
   }
 

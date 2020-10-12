@@ -6,7 +6,7 @@ body {
   justify-content: center;
 }
 #gameScreen {
-  margin-top: 10vh;
+  margin-top: 16vh;
   background-image: url("./background.jpg");
   background-size: cover;
   border-radius: 30px;

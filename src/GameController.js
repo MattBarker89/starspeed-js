@@ -32,7 +32,7 @@ export default class GameController {
     this.player = new Player(this);
     this.hud = new Hud(this);
     this.gameOver  = new GameOver(this)
-    this.enemies.addEnemies(8);
+    this.enemies.addEnemies(6);
   }
 
   reStart = () => {
@@ -41,7 +41,7 @@ export default class GameController {
     this.enemies = new Enemies(this);
     this.player = new Player(this);
     this.hud = new Hud(this);
-    this.enemies.addEnemies(8);
+    this.enemies.addEnemies(6);
   }
 
   checkForRespawn = () => {

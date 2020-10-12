@@ -37,10 +37,10 @@ export default class Hud extends GameObject{
     ctx.font = "18px retrobound";
     ctx.fillStyle = "WHITE";
     ctx.fillText(`Score: ${this.score}`,  32, 32);
-    ctx.fillText(`Lives:  ${this.playerLives}`,SCREEN.size.width - 112, 32);
-    ctx.fillText(`Shots Fired: ${this.shotsFired}`, 32, 55);
-    ctx.fillText(`Shots Hit: ${this.shotsHit}`, 32, 76);
-    ctx.fillText(`Accuracy: ${this.accuracy}%`, 32, 99);
+    ctx.fillText(`Lives: ${this.playerLives}`,SCREEN.size.width - 105, 32);
+    // ctx.fillText(`Shots Fired: ${this.shotsFired}`, 32, 55);
+    // ctx.fillText(`Shots Hit: ${this.shotsHit}`, 32, 76);
+    // ctx.fillText(`Accuracy: ${this.accuracy}%`, 32, 99);
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();

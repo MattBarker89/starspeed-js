@@ -8,7 +8,7 @@ export default class PlayerBullet extends GameObject {
   stateManager = window.stateManager;
   inputManager = window.inputManager;
   resourceManager = window.resourceManager;
-  speed = 8;
+  speed = 6;
 
 
   constructor(x,y, gameController) {
