@@ -20,6 +20,8 @@ export const SPRITE_PATHS = Object.freeze([
 './player.png',
 './enemy.png',
 './enemy-damage.png',
+'./sweeping-enemy.png',
+'./sweeping-enemy-damage.png',
 './logo.png',
 './player-bullet.png',
 './enemy-bullet.png',

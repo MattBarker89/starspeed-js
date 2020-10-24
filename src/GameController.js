@@ -5,6 +5,8 @@ import Physics from './Physics.js';
 import Enemies from './Enemies.js';
 import Hud from './Hud.js'
 import GameOver from './GameOver.js';
+import ParticleEmitter from './ParticleEmitter.js';
+import ParticleEmitters from './ParticleEmitters.js';
 
 export default class GameController {
 
@@ -19,6 +21,7 @@ export default class GameController {
   respawnCounter = 0;
 
   physics
+  particleEmitters;
   bullets;
   enemies;
   player;
@@ -27,21 +30,25 @@ export default class GameController {
 
   constructor() {
     this.physics = new Physics(this);
+    this.particleEmitters = new ParticleEmitters(this);
     this.bullets = new Bullets(this);
     this.enemies = new Enemies(this);
     this.player = new Player(this);
     this.hud = new Hud(this);
     this.gameOver  = new GameOver(this)
-    this.enemies.addEnemies(6);
+    this.enemies.addEnemies(2);
+    this.enemies.addSweepingEnemies(1);
   }
 
   reStart = () => {
     this.physics = new Physics(this);
+    this.particleEmitters = new ParticleEmitters(this);
     this.bullets = new Bullets(this);
     this.enemies = new Enemies(this);
     this.player = new Player(this);
     this.hud = new Hud(this);
-    this.enemies.addEnemies(6);
+    this.enemies.addEnemies(2);
+    this.enemies.addSweepingEnemies(1);
   }
 
   checkForRespawn = () => {
@@ -55,7 +62,6 @@ export default class GameController {
   }
 
   changeToGameOver = () => {
-    console.log('GAME OVER')
     this.stateManager.gameState = STATES.game.gameOver
   }
   
@@ -67,6 +73,7 @@ export default class GameController {
 
   tick(deltaTime) {
     if (!this.correctState()) return;
+    this.particleEmitters.tick(deltaTime)
     this.bullets.tick(deltaTime)
     this.enemies.tick(deltaTime)
     this.player.tick(deltaTime)
@@ -77,6 +84,7 @@ export default class GameController {
 
   render(ctx) {
     if (!this.correctState()) return;
+    this.particleEmitters.render(ctx)
     this.bullets.render(ctx)
     this.enemies.render(ctx);
     this.player.render(ctx)

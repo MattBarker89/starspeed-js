@@ -8,33 +8,22 @@ export default class Particle extends GameObject{
   stateManager = window.stateManager
 
   particleEmitter;
-  particles = [];
   id;
-  settings = {
-    particleSize: 2,
-    startingX: 0,
-    startingY: 0,
-    gravity: 0.7,
-    maxLife: 100,
-  }
+  life;
+  vx;
+  vy;
+  gravity;
+  options = {}
 
   constructor(particleEmitter) {
     super();
     this.particleEmitter = particleEmitter;
-    this.settings.startingX = 
-      this.particleEmitter.gameObject.pos.x + 
-      this.particleEmitter.gameObject.size.width / 2,
-    this.settings.startingY = 
-      this.particleEmitter.gameObject.pos.y +
-      this.particleEmitter.gameObject.size.height,
-    this.pos.x = this.settings.startingX;
-    this.pos.y = this.settings.startingY;
-    this.vx = randomIntBetween(-0.8, 0.8)
-    this.vy = randomIntBetween(0, 2)
-    // this.vx = Math.random() * 20 - 10; left / right
-    // this.vy = Math.random() * 20 - 5; high / low
-
-
+    this.options = this.particleEmitter.particleOptions;
+    this.pos.x = this.options.startingX;
+    this.pos.y = this.options.startingY;
+    this.vx = this.options.vx;
+    this.vy = this.options.vy;
+    this.gravity = this.options.gravity;
     this.id = uuid();
     this.life = 0;
   }
@@ -43,17 +32,16 @@ export default class Particle extends GameObject{
     if (!this.correctState()) return;
     this.pos.x += this.vx;
     this.pos.y += this.vy;
-    this.vy += this.settings.gravity;
+    this.vy += this.gravity;
     this.life++;
-    if (this.life >= this.settings.maxLife) this.particleEmitter.removeParticle(this.id)
+    if (this.life >= this.options.maxLife) this.particleEmitter.removeParticle(this.id)
   } 
 
   render(ctx) {
     if (!this.correctState()) return;
-    ctx.clearRect(this.settings.leftWall, this.settings.groundLevel, SCREEN.size.width, SCREEN.size.height);
     ctx.beginPath();
-    ctx.fillStyle="#36bbf5";
-    ctx.arc(this.pos.x, this.pos.y, this.settings.particleSize, 0, Math.PI*2, true); 
+    ctx.fillStyle="#36bbf5"; 
+    ctx.arc(this.pos.x, this.pos.y, this.options.particleSize, 0, Math.PI*2, true); 
     ctx.closePath();
     ctx.fill();
   }

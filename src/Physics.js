@@ -25,6 +25,10 @@ export default class Physics {
       if (this.hasCollided(a,b)) { 
         collisionDetected = true;
         this.gameController.bullets.removeEnemyBullet(b.id)
+        if (this.gameController.player.shield.shieldUp) {
+          
+        }
+
       }
     })
     return collisionDetected;
