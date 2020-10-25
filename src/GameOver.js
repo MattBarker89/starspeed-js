@@ -49,7 +49,6 @@ export default class GameOver extends GameObject {
       this.quitColor = "WHITE"
       this.saveHighScoreColor = "#f901a3"
     } 
-    this.soundManager.playMenuSelect();
   }
 
   increaseSelectedOption = () => {

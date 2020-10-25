@@ -27,6 +27,23 @@ export const SPRITE_PATHS = Object.freeze([
 './enemy-bullet.png',
 ]);
 
+export const SOUND_PATHS = Object.freeze([
+  { name: 'shoot', path: './shoot.wav' },
+  { name: 'hit', path: './hit.wav' },
+  { name: 'die', path: './die.wav' },
+  { name: 'enemyShoot', path: './enemy-shoot.wav' },
+  { name: 'playerDie', path: './player-die.wav' },
+  { name: 'pause', path: './pause.wav' },
+  { name: 'unpause', path: './unpause.wav' },
+  { name: 'shieldUp1', path: './shield-up-1.wav' },
+  { name: 'shieldUp2', path: './shield-up-2.wav' },
+  { name: 'shieldUp3', path: './shield-up-3.wav' },
+  { name: 'shieldOff', path: './shield-off.wav' },
+  { name: 'shieldHit', path: './shield-hit.wav' },
+  { name: 'menuSelect', path: './menu-select.wav' },
+  { name: 'menuActivate', path: './menu-activate.wav' },
+])
+
 export const STATES = Object.freeze({
   system: {
     menu: 0,

@@ -1,94 +1,112 @@
+import { SOUND_PATHS } from './constants.js';
 
 export default class SoundManager {
 
   soundEnabled;
 
+  sounds = [];
+  pendingLoading = [];
+  callback;
+
   constructor(){
     this.soundEnabled = true;
   }
 
-  hit = new Audio("./hit.wav");
-  die = new Audio("./die.wav");
-  enemyShoot = new Audio("./enemy-shoot.wav");
-  playerDie = new Audio("./player-die.wav");
-  pause = new Audio("./pause.wav");
-  unpause = new Audio("./unpause.wav");
-  shieldUp1 = new Audio("./shield-up-1.wav");
-  shieldUp2 = new Audio("./shield-up-2.wav");
-  shieldUp3 = new Audio("./shield-up-3.wav");
-  shieldOff = new Audio("./shield-off.wav");
-  shieldHit = new Audio("./shield-hit.wav");
-  menuSelect = new Audio("./menu-select.wav");
-  menuActivate = new Audio("./menu-activate.wav");
+  onReady = (func) => {
+    this.callBack = func 
+  }
+
+  checkAllSoundsHaveLoaded = () => {
+    if (this.pendingLoading.length) return;
+    this.callBack();
+  }
+
+  loadSounds = () => {
+    SOUND_PATHS.forEach( (sound) => {
+      this.pendingLoading.push(sound.path);
+      const audio = new Audio(sound.path);
+      this.sounds.push({
+        name: sound.name,
+        audio
+      })
+      audio.addEventListener('canplaythrough', () => {
+        const match = this.pendingLoading.find(path => path === sound.path);
+        if (match) {
+          this.pendingLoading = this.pendingLoading.filter(path => path !== sound.path);
+          this.checkAllSoundsHaveLoaded();   
+        }
+      });
+    });
+  }
 
   playShoot = () => {
     if (!this.soundEnabled) return;
-    new Audio("./shoot.wav").play();
+    this.sounds.find((s) =>  s.name === 'shoot').audio.play();  
   }
 
   playHit = () => {
     if (!this.soundEnabled) return;
-    this.hit.play();
+    this.sounds.find((s) =>  s.name === 'hit').audio.play();  
   }
 
   playDie = () => {
     if (!this.soundEnabled) return;
-    this.die.play();
+    this.sounds.find((s) =>  s.name === 'die').audio.play();  
   }
 
   playPlayerDie = () => {
     if (!this.soundEnabled) return;
-    this.playerDie.play();
+    this.sounds.find((s) =>  s.name === 'playerDie').audio.play();  
   }
 
   playPause = () => {
     if (!this.soundEnabled) return;
-    this.pause.play();
+    this.sounds.find((s) =>  s.name === 'pause').audio.play();  
   }
 
   playUnpause = () => {
     if (!this.soundEnabled) return;
-    this.unpause.play();
+    this.sounds.find((s) =>  s.name === 'unpause').audio.play();  
   }
 
   playEnemyShoot = () => {
     if (!this.soundEnabled) return;
-    this.enemyShoot.play();
+    this.sounds.find((s) =>  s.name === 'enemyShoot').audio.play();  
   }
 
   playShieldUp1 = () => {
     if (!this.soundEnabled) return;
-    this.shieldUp1.play();
+    this.sounds.find((s) =>  s.name === 'shieldUp1').audio.play();  
   }
   
   playShieldUp2 = () => {
     if (!this.soundEnabled) return;
-    this.shieldUp2.play();
+    this.sounds.find((s) =>  s.name === 'shieldUp2').audio.play();  
   }
   
   playShieldUp3 = () => {
     if (!this.soundEnabled) return;
-    this.shieldUp3.play();
+    this.sounds.find((s) =>  s.name === 'shieldUp3').audio.play();  
   }
 
   playShieldOff = () => {
     if (!this.soundEnabled) return;
-    this.shieldOff.play();
+    this.sounds.find((s) =>  s.name === 'shieldOff').audio.play(); 
   }
 
   playShieldHit = () => {
     if (!this.soundEnabled) return;
-    this.shieldHit.play();
+    this.sounds.find((s) =>  s.name === 'shieldHit').audio.play(); 
   }
 
   playMenuSelect = () => {
     if (!this.soundEnabled) return;
-    this.menuSelect.play();
+    this.sounds.find((s) =>  s.name === 'menuSelect').audio.play(); 
   }
 
   playMenuActivate = () => {
     if (!this.soundEnabled) return;
-    this.menuActivate.play();
+    this.sounds.find((s) =>  s.name === 'menuActivate').audio.play();
   }
   
 

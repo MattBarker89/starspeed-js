@@ -32,7 +32,7 @@ export default class ResourceManager {
   }
 
   onReady = (func) => {
-    this.callBack = func
+    this.callBack = func 
   }
 
 }

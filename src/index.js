@@ -51,7 +51,10 @@ const gameLoop = (timestamp) => {
   requestAnimationFrame(gameLoop);
 }
 
-resourceManager.loadSprites();
-resourceManager.onReady(gameLoop)
+const start = () => {
+  resourceManager.onReady(gameLoop)
+  soundManager.onReady(resourceManager.loadSprites);
+  soundManager.loadSounds();
+}
 
-
+start();
