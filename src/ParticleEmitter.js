@@ -46,7 +46,6 @@ export default class PlayerEngine extends GameObject{
         this.updateParticleOptions();
         this.particles.push(new Particle(this));
         this.particleCounter = 0;
-        console.log(this.particles.length)
       } 
     }
     this.particles.forEach((particle) => particle.tick(deltaTime))

@@ -44,6 +44,11 @@ export const SOUND_PATHS = Object.freeze([
   { name: 'menuActivate', path: './menu-activate.wav' },
 ])
 
+export const MUSIC_PATHS = Object.freeze([
+  { name: 'menu', path: './menu-music.mp3' },
+  { name: 'game', path: './game-music.mp3' },
+])
+
 export const STATES = Object.freeze({
   system: {
     menu: 0,

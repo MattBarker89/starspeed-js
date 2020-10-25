@@ -1,9 +1,12 @@
 import GameObject from './GameObject.js'
 import { STATES, SCREEN } from './constants.js'
-export default class StarField extends GameObject {
+export default class Menu extends GameObject {
 
   stateManager = window.stateManager;
   resourceManager = window.resourceManager;
+  musicManger = window.musicManager;
+
+  playingMusic 
 
   flyInSpeed = 128;
   logoTimeout = 1500;
@@ -21,6 +24,7 @@ export default class StarField extends GameObject {
     this.highScoresX  = this.highScoresXStart;
     this.optionsX = this.optionsXStart;
     this.creditsX = this.creditsXStart;
+    this.playingMusic = false;
     this.toggleLogo();
   }
 
@@ -28,8 +32,15 @@ export default class StarField extends GameObject {
     setTimeout( () => { this.logoToggled = true }, this.logoTimeout )
   }
 
+  startMusicIfNotPlaying = () => {
+    if (this.playingMusic) return;
+    this.musicManger.playMenuMusic()
+    this.playingMusic = true;
+  }
+
   tick(deltaTime) {
     if (!this.correctState()) return;
+    this.startMusicIfNotPlaying();
 
     if (this.logoToggled && this.logoX < 80 ) this.logoX += this.flyInSpeed;
     if (this.logoX >= 80 ) {

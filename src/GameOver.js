@@ -48,7 +48,7 @@ export default class GameOver extends GameObject {
     } else if (this.selectedOption === 1) {
       this.quitColor = "WHITE"
       this.saveHighScoreColor = "#f901a3"
-    } 
+    }  
   }
 
   increaseSelectedOption = () => {

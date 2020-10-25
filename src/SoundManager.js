@@ -41,7 +41,8 @@ export default class SoundManager {
 
   playShoot = () => {
     if (!this.soundEnabled) return;
-    this.sounds.find((s) =>  s.name === 'shoot').audio.play();  
+    const sound = new Audio('./shoot.wav').play();
+    //this.sounds.find((s) =>  s.name === 'shoot').audio.play();  
   }
 
   playHit = () => {

@@ -4,7 +4,10 @@ import { STATES, SCREEN } from './constants.js'
 export default class Hud extends GameObject{
 
   inputManager = window.inputManager;
-  stateManager = window.stateManager
+  stateManager = window.stateManager;
+  musicManager = window.musicManager;
+
+  playingMusic
 
   playerLives;
   score
@@ -19,10 +22,18 @@ export default class Hud extends GameObject{
     this.shotsFired = this.stateManager.score.shotsFired;
     this.shotsHit = this.stateManager.score.shotsHit;
     this.accuracy = this.stateManager.score.accuracy;
+    this.playingMusic = false;
+  }
+
+  startMusicIfNotPlaying = () => {
+    if (this.playingMusic) return;
+    window.musicManager.playGameMusic()
+    this.playingMusic = true;
   }
 
   tick(deltaTime) {
     if (!this.correctState()) return;
+    this.startMusicIfNotPlaying();
     this.playerLives = this.stateManager.playerLives;
     this.score = this.stateManager.score.currentScore;
     this.score = this.stateManager.score.currentScore;

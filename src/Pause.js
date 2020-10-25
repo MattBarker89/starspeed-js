@@ -6,6 +6,7 @@ export default class Pause extends GameObject {
   stateManager = window.stateManager;
   resourceManager = window.resourceManager;
   inputManager = window.inputManager;
+  musicManager = window.musicManager;
 
   isPaused;
 
@@ -21,10 +22,12 @@ export default class Pause extends GameObject {
         this.stateManager.systemState = STATES.system.pause
         this.isPaused = true;
         this.soundManager.playPause()
+        this.musicManager.pauseGameMusic();
       } else if (this.stateManager.systemState === STATES.system.pause) {
         this.stateManager.systemState = STATES.system.game
         this.isPaused = false;
         this.soundManager.playUnpause()
+        this.musicManager.unPauseGameMusic();
       }
     }
   }
