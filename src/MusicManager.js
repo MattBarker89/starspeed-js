@@ -9,7 +9,7 @@ export default class MusicManger {
   callback;
 
   constructor(){
-    this.musicEnabled = true;
+    this.musicEnabled = false;
   }
 
   onReady = (func) => {

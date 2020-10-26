@@ -22,9 +22,14 @@ export const SPRITE_PATHS = Object.freeze([
 './enemy-damage.png',
 './sweeping-enemy.png',
 './sweeping-enemy-damage.png',
+'./side-enemy-left.png',
+'./side-enemy-left-damage.png',
+'./side-enemy-right.png',
+'./side-enemy-right-damage.png',
 './logo.png',
 './player-bullet.png',
 './enemy-bullet.png',
+'./enemy-bullet-side.png',
 ]);
 
 export const SOUND_PATHS = Object.freeze([
@@ -32,6 +37,7 @@ export const SOUND_PATHS = Object.freeze([
   { name: 'hit', path: './hit.wav' },
   { name: 'die', path: './die.wav' },
   { name: 'enemyShoot', path: './enemy-shoot.wav' },
+  { name: 'enemySideShoot', path: './enemy-side-shoot.wav' },
   { name: 'playerDie', path: './player-die.wav' },
   { name: 'pause', path: './pause.wav' },
   { name: 'unpause', path: './unpause.wav' },
@@ -48,6 +54,11 @@ export const MUSIC_PATHS = Object.freeze([
   { name: 'menu', path: './menu-music.mp3' },
   { name: 'game', path: './game-music.mp3' },
 ])
+
+export const SIDES = Object.freeze({
+  left: 0,
+  right: 0,
+})
 
 export const STATES = Object.freeze({
   system: {

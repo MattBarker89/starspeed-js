@@ -75,6 +75,11 @@ export default class SoundManager {
     this.sounds.find((s) =>  s.name === 'enemyShoot').audio.play();  
   }
 
+  playEnemySideShoot = () => {
+    if (!this.soundEnabled) return;
+    this.sounds.find((s) =>  s.name === 'enemySideShoot').audio.play();  
+  }
+
   playShieldUp1 = () => {
     if (!this.soundEnabled) return;
     this.sounds.find((s) =>  s.name === 'shieldUp1').audio.play();  

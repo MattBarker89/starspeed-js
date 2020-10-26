@@ -17,7 +17,7 @@ export default class Player extends GameObject {
   addPlayerBullet
   canShoot = true;
   shootCoolDownCounter = 0
-  shootCoolDownRate = 8;  
+  shootCoolDownRate = 16;  
   
   gameController
 
@@ -51,7 +51,8 @@ export default class Player extends GameObject {
   }
 
   checkBulletCollisions = () => {
-    if (this.gameController.physics.checkCollisionsWithEnemyBullets(this)) {
+    if (this.gameController.physics.checkCollisionsWithEnemyBullets(this) || 
+    this.gameController.physics.checkCollisionsWithEnemyBulletsSide(this)) {
       if(!this.shield.shieldUp) {
         this.die()
       } else {

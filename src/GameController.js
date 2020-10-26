@@ -36,8 +36,9 @@ export default class GameController {
     this.player = new Player(this);
     this.hud = new Hud(this);
     this.gameOver  = new GameOver(this)
-    this.enemies.addEnemies(2);
-    this.enemies.addSweepingEnemies(1);
+    // this.enemies.addEnemies(2);
+    // this.enemies.addSweepingEnemies(1);
+    this.enemies.addSideEnemies(2);
   }
 
   reStart = () => {

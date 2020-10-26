@@ -2,7 +2,7 @@ import GameObject from './GameObject.js';
 import { STATES, SCREEN } from './constants.js'
 import { randomIntBetween, uuid } from './utilities.js'
 
-export default class Sweeping extends GameObject{
+export default class SweepingEnemy extends GameObject{
 
   soundManager = window.soundManager;
   physics = window.physics;
@@ -55,8 +55,6 @@ export default class Sweeping extends GameObject{
     if (this.movingIn) return;
     this.shootTimer++
     if(this.shootTimer >= this.shootInterval) {
-      this.shoot();
-      this.shoot();
       this.shoot();
       this.resetShootInterval();
       this.shootTimer = 0;

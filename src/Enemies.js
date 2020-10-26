@@ -1,7 +1,8 @@
 import GameObject from './GameObject.js'
-import { STATES } from './constants.js'
+import { SIDES, STATES } from './constants.js'
 import Enemy from './Enemy.js';
 import SweepingEnemy from './SweepingEnemy.js';
+import SideEnemy from './SideEnemy.js';
 export default class Enemies extends GameObject {
 
   physics = window.physics;
@@ -10,6 +11,8 @@ export default class Enemies extends GameObject {
   gameController
   enemies = [];
   sweepingEnemies = []
+
+  lastSide = SIDES.left;
 
   constructor(gameController) {
     super();
@@ -50,6 +53,19 @@ export default class Enemies extends GameObject {
     this.sweepingEnemies = this.sweepingEnemies.filter(b => b.id !== id);
     this.sweepingEnemies.push(new SweepingEnemy(this.gameController));   
   }
+
+  addSideEnemies = (count) => {
+    for (let i = 0; i < count; i++) {
+      this.sweepingEnemies.push(new SideEnemy(this.gameController, this.lastSide));
+      this.lastSide = !this.lastSide;
+    }
+  }
+
+  removeSideEnemy = (id) => {
+    this.sweepingEnemies = this.sweepingEnemies.filter(b => b.id !== id);
+    this.sweepingEnemies.push(new SideEnemy(this.gameController));   
+  }
+
 
   correctState() {
     return (

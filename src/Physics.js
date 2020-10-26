@@ -34,6 +34,23 @@ export default class Physics {
     return collisionDetected;
   }
 
+  checkCollisionsWithEnemyBulletsSide = (a) => { 
+    if(this.gameController.bullets.enemyBulletsSide.length <= 0) return;
+    let collisionDetected = false;
+    this.gameController.bullets.enemyBulletsSide.forEach((b) => {
+      if (this.hasCollided(a,b)) { 
+        collisionDetected = true;
+        this.gameController.bullets.removeEnemyBulletSide(b.id)
+        if (this.gameController.player.shield.shieldUp) {
+          
+        }
+
+      }
+    })
+    return collisionDetected;
+  }
+
+
   checkCollisionsWithEnemies = (a) => {
     let collisionDetected = false;
     this.enemies.forEach((b) => {
