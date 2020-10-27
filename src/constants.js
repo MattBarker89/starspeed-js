@@ -54,6 +54,8 @@ export const SOUND_PATHS = Object.freeze([
   { name: 'menuActivate', path: './menu-activate.wav' },
   { name: 'powerUp', path: './powerup.wav' },
   { name: 'extraLife', path: './extra-life.wav' },
+  { name: 'nextRound', path: './next-round.wav' },
+  { name: 'roundComplete', path: './round-complete.wav' },
 ])
 
 export const MUSIC_PATHS = Object.freeze([
@@ -86,3 +88,18 @@ export const STATES = Object.freeze({
     paused: 1,
   }
 })
+
+export const ROUNDS = Object.freeze([
+  { enemy:2, sweepingEnemy:0, sideEnemy:0, slowAsteroid:0, fastAsteroid:0, powerUp: 0, extraLife:0 },
+  { enemy:3, sweepingEnemy:1, sideEnemy:1, slowAsteroid:0, fastAsteroid:0, powerUp: 0, extraLife:0 },
+  { enemy:3, sweepingEnemy:2, sideEnemy:2, slowAsteroid:0, fastAsteroid:1, powerUp: 0, extraLife:0 },
+  { enemy:4, sweepingEnemy:2, sideEnemy:0, slowAsteroid:1, fastAsteroid:0, powerUp: 1, extraLife:0 },
+  { enemy:4, sweepingEnemy:3, sideEnemy:0, slowAsteroid:1, fastAsteroid:0, powerUp: 0, extraLife:1 },
+  { enemy:4, sweepingEnemy:3, sideEnemy:1, slowAsteroid:0, fastAsteroid:2, powerUp: 0, extraLife:0 },
+  { enemy:4, sweepingEnemy:4, sideEnemy:2, slowAsteroid:1, fastAsteroid:1, powerUp: 1, extraLife:0 },
+  { enemy:4, sweepingEnemy:4, sideEnemy:0, slowAsteroid:2, fastAsteroid:2, powerUp: 0, extraLife:0 },
+  { enemy:5, sweepingEnemy:4, sideEnemy:2, slowAsteroid:2, fastAsteroid:2, powerUp: 1, extraLife:0 },
+  { enemy:6, sweepingEnemy:5, sideEnemy:0, slowAsteroid:6, fastAsteroid:8, powerUp: 0, extraLife:0 },
+  { enemy:6, sweepingEnemy:6, sideEnemy:2, slowAsteroid:8, fastAsteroid:12, powerUp: 0, extraLife:1 },
+])
+

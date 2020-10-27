@@ -17,14 +17,14 @@ export default class SideEnemy extends GameObject{
   speedY = 2;
   moveInSpeed = this.speedY * 2
   id;
-  health = 450;
+  health = 30;
   shootIntervalLow = 2;
   shootIntervalHigh = 2;
   shootInterval; 
   shootTimer = 0; 
   movingIn = true;
-  killPoints = 50;
-  hitPoints = 5;
+  killPoints = 15;
+  hitPoints = 1;
   shotCount = 0;
   shotLimit = 8;
   marginBottom = 64;
@@ -78,7 +78,7 @@ export default class SideEnemy extends GameObject{
   
   die = () => {
     this.soundManager.playDie();
-    this.gameController.enemies.removeSweepingEnemy(this.id)
+    this.gameController.enemies.removeSideEnemy(this.id)
     this.stateManager.score.increaseCurrentScore(this.killPoints);
   }
 

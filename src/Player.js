@@ -17,12 +17,13 @@ export default class Player extends GameObject {
   addPlayerBullet
   canShoot = true;
   shootCoolDownCounter = 0
-  shootCoolDownRate = 22;  
+  shootCoolDownRate = 12;  
   powerUpCountDown;
   
   gameController
 
   speed = 8;
+  speedVert = 4;
   bottomMargin =  32;
   size = {
     width: 64,
@@ -76,7 +77,7 @@ export default class Player extends GameObject {
   checkPowerUpCountDown = () => {
     if (this.powerUpCountDown > 0) this.powerUpCountDown--;
     if (this.powerUpCountDown > 0) this.shootCoolDownRate = 6;
-    if (this.powerUpCountDown === 0) this.shootCoolDownRate = 32;
+    if (this.powerUpCountDown === 0) this.shootCoolDownRate = 12;
 
   }
 
@@ -109,13 +110,26 @@ export default class Player extends GameObject {
   }
 
   checkMovement() {
-    if(this.inputManager.keyDowns.left) {
+    if (this.inputManager.keyDowns.left) {
       this.pos.x = this.pos.x -= this.speed;
     } 
 
-    if(this.inputManager.keyDowns.right) {
+    if (this.inputManager.keyDowns.right) {
       this.pos.x = this.pos.x += this.speed
     };
+
+    if (this.inputManager.keyDowns.up && !this.shieldUp) {
+      if (this.pos.y >= SCREEN.size.height / 2) {
+        this.pos.y -= this.speedVert;
+      }
+    } else {
+       this.pos.y += this.speedVert;
+    }
+
+    if ( this.pos.y >= SCREEN.size.height - this.size.height - this.bottomMargin) {
+      this.pos.y = SCREEN.size.height - this.size.height - this.bottomMargin
+    }
+   
   }
 
   tick(deltaTime) {

@@ -50,13 +50,19 @@ export default class MusicManger {
   playMenuMusic = () => {
     if (!this.musicEnabled) return;
     this.stopAllMusic();
-    this.musicTracks.find((m) =>  m.name === 'menu').audio.play();  
+    this.musicTracks.find((m) =>  m.name === 'menu').audio.play();
+      
   }
 
   playGameMusic = () => {
     if (!this.musicEnabled) return;
     this.stopAllMusic();
-    this.musicTracks.find((m) =>  m.name === 'game').audio.play();  
+    this.musicTracks.find((m) =>  m.name === 'game').audio.play(); 
+    
+    // audioElement.addEventListener('ended', function() {
+    //     this.currentTime = 0;
+    //     this.play();
+    // }, false);
   }
 
   pauseGameMusic = () => {

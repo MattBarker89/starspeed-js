@@ -11,6 +11,7 @@ export default class Enemies extends GameObject {
   gameController
   enemies = [];
   sweepingEnemies = []
+  sideEnemies = []
 
   lastSide = SIDES.left;
 
@@ -24,12 +25,14 @@ export default class Enemies extends GameObject {
     if (!this.correctState()) return;
     this.enemies.forEach((e) => e.tick(deltaTime))
     this.sweepingEnemies.forEach((e) => e.tick(deltaTime))
+    this.sideEnemies.forEach((e) => e.tick(deltaTime));
   }
 
   render(ctx) {
     if (!this.correctState()) return;
     this.enemies.forEach((e) => e.render(ctx))
     this.sweepingEnemies.forEach((e) => e.render(ctx))
+    this.sideEnemies.forEach((e) => e.render(ctx))
   }
 
   addEnemies = (count) => {
@@ -39,8 +42,7 @@ export default class Enemies extends GameObject {
   }
 
   removeEnemy = (id) => {
-    this.enemies = this.enemies.filter(b => b.id !== id);
-    this.enemies.push(new Enemy(this.gameController));   
+    this.enemies = this.enemies.filter(b => b.id !== id);  
   }
 
   addSweepingEnemies = (count) => {
@@ -50,22 +52,27 @@ export default class Enemies extends GameObject {
   }
 
   removeSweepingEnemy = (id) => {
-    this.sweepingEnemies = this.sweepingEnemies.filter(b => b.id !== id);
-    this.sweepingEnemies.push(new SweepingEnemy(this.gameController));   
+    this.sweepingEnemies = this.sweepingEnemies.filter(b => b.id !== id); 
   }
 
   addSideEnemies = (count) => {
     for (let i = 0; i < count; i++) {
-      this.sweepingEnemies.push(new SideEnemy(this.gameController, this.lastSide));
+      this.sideEnemies.push(new SideEnemy(this.gameController, this.lastSide));
       this.lastSide = !this.lastSide;
     }
   }
 
   removeSideEnemy = (id) => {
-    this.sweepingEnemies = this.sweepingEnemies.filter(b => b.id !== id);
-    this.sweepingEnemies.push(new SideEnemy(this.gameController));   
+    this.sideEnemies = this.sideEnemies.filter(b => b.id !== id); 
   }
 
+  allDead = () => {
+    return (
+      !this.enemies.length &&
+      !this.sideEnemies.length &&
+      !this.sweepingEnemies.length
+    )
+  }
 
   correctState() {
     return (

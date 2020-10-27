@@ -23,7 +23,7 @@ export default class SweepingEnemy extends GameObject{
   shootInterval; 
   shootTimer = 0; 
   movingIn = true;
-  killPoints = 50;
+  killPoints = 15;
   hitPoints = 5;
 
   size = {

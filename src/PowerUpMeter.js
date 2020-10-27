@@ -15,8 +15,6 @@ export default class PowerUpMeter extends GameObject{
     super();
     this.isPoweredUp = true;
     this.currentLevel = 0;
-
-
   }
 
   countDownPowerUp = () => {
@@ -36,6 +34,9 @@ export default class PowerUpMeter extends GameObject{
 
   render(ctx) {
     if (!this.correctState()) return;
+
+    return
+
     ctx.beginPath();
     ctx.lineWidth = 3
     ctx.shadowBlur=10

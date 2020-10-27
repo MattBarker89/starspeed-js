@@ -69,7 +69,6 @@ const start = () => {
 }
 
 const click = () => {
-  console.log('sdasadsad')
   if (!gameStarted) {
     loading.classList.remove('hidden');
     mouse.classList.add('hidden');

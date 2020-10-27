@@ -124,7 +124,17 @@ export default class SoundManager {
     if (!this.soundEnabled) return;
     this.sounds.find((s) =>  s.name === 'extraLife').audio.play();
   }
-  
+
+  playNextRound = () => {
+    if (!this.soundEnabled) return;
+    this.sounds.find((s) =>  s.name === 'nextRound').audio.play();
+  }
+
+  playRoundComplete = () => {
+    if (!this.soundEnabled) return;
+    this.sounds.find((s) =>  s.name === 'roundComplete').audio.play();
+  }
+
 
 }
 
