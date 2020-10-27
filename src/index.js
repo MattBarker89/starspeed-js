@@ -10,6 +10,8 @@ import Pause from './Pause.js';
 import StarField from './StarField.js';
 
 let canvas = document.getElementById('gameScreen');
+let mouse = document.getElementById('mouse');
+let loading = document.getElementById('loading');
 let ctx = canvas.getContext('2d');
 
 window.stateManager = new StateManager();
@@ -55,6 +57,7 @@ const gameLoop = (timestamp) => {
 }
 
 const initGameLoop = () => {
+  loading.classList.add('hidden')
   gameLoop()
 }
 
@@ -65,9 +68,15 @@ const start = () => {
   musicManager.loadMusic();
 }
 
-canvas.addEventListener('click', () => {
-  if(! gameStarted ) {
+const click = () => {
+  console.log('sdasadsad')
+  if (!gameStarted) {
+    loading.classList.remove('hidden');
+    mouse.classList.add('hidden');
     start();
     gameStarted = true;
   }
-}, false);
+}
+
+canvas.addEventListener('click', click, false);
+mouse.addEventListener('click',  click, false);

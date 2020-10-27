@@ -20,6 +20,21 @@ Jeremy Blake - Powerup! ♫ NO COPYRIGHT 8-bit Music - game song.
 intro song
 
 
-menu music Density & Time - MAZE
+
+
+
+
+0:01 / 1:54
+
+menu music Eric Skiff - A Night Of Dizzy Spells 
 
 game music Vibe Mountain - Operatic 3
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+
+/*!
+ * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
+ * Copyright 2015 Daniel Cardoso <@DanielCardoso>
+ * Licensed under MIT
+ */
