@@ -17,7 +17,8 @@ export default class Player extends GameObject {
   addPlayerBullet
   canShoot = true;
   shootCoolDownCounter = 0
-  shootCoolDownRate = 16;  
+  shootCoolDownRate = 22;  
+  powerUpCountDown;
   
   gameController
 
@@ -61,6 +62,24 @@ export default class Player extends GameObject {
     } 
   }
 
+  checkAsteroidCollisions = () => {
+    if (this.gameController.physics.checkCollisionsWithFastAsteroids(this) || 
+    this.gameController.physics.checkCollisionsWithSlowAsteroids(this)) {
+      if(!this.shield.shieldUp) {
+        this.die()
+      } else {
+        this.soundManager.playShieldHit();
+      }
+    } 
+  }
+
+  checkPowerUpCountDown = () => {
+    if (this.powerUpCountDown > 0) this.powerUpCountDown--;
+    if (this.powerUpCountDown > 0) this.shootCoolDownRate = 6;
+    if (this.powerUpCountDown === 0) this.shootCoolDownRate = 32;
+
+  }
+
   checkShootCoolDown() {
     if (this.canShoot) return;
     this.shootCoolDownCounter++
@@ -72,7 +91,7 @@ export default class Player extends GameObject {
 
   checkFire() {
     if (!this.canShoot || this.shield.shieldUp) return
-    if(this.inputManager.keyDowns.space) {
+    if(this.inputManager.keyDowns.space ) {
       this.gameController.bullets.addPlayerBullet(this.pos.x + this.size.width /2 , this.pos.y)
       this.soundManager.playShoot();
       this.canShoot = false;
@@ -109,7 +128,9 @@ export default class Player extends GameObject {
     this.checkMovement();
     this.checkBounds();
     this.checkShootCoolDown();
+    this.checkPowerUpCountDown();
     this.checkBulletCollisions();
+    this.checkAsteroidCollisions();
   }
 
   render(ctx) {

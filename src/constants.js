@@ -30,6 +30,10 @@ export const SPRITE_PATHS = Object.freeze([
 './player-bullet.png',
 './enemy-bullet.png',
 './enemy-bullet-side.png',
+'./powerup.png',
+'./extra-life.png',
+'./slow-asteroid.png',
+'./fast-asteroid.png',
 ]);
 
 export const SOUND_PATHS = Object.freeze([
@@ -48,6 +52,8 @@ export const SOUND_PATHS = Object.freeze([
   { name: 'shieldHit', path: './shield-hit.wav' },
   { name: 'menuSelect', path: './menu-select.wav' },
   { name: 'menuActivate', path: './menu-activate.wav' },
+  { name: 'powerUp', path: './powerup.wav' },
+  { name: 'extraLife', path: './extra-life.wav' },
 ])
 
 export const MUSIC_PATHS = Object.freeze([

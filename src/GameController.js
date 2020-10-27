@@ -3,10 +3,12 @@ import Player from './Player.js';
 import Bullets from './Bullets.js';
 import Physics from './Physics.js';
 import Enemies from './Enemies.js';
+import Asteroids from './Asteroids.js'
 import Hud from './Hud.js'
 import GameOver from './GameOver.js';
 import ParticleEmitter from './ParticleEmitter.js';
 import ParticleEmitters from './ParticleEmitters.js';
+import Pickups from './Pickups.js'
 
 export default class GameController {
 
@@ -24,6 +26,7 @@ export default class GameController {
   particleEmitters;
   bullets;
   enemies;
+  pickups;
   player;
   hud;
   gameOver;
@@ -33,12 +36,18 @@ export default class GameController {
     this.particleEmitters = new ParticleEmitters(this);
     this.bullets = new Bullets(this);
     this.enemies = new Enemies(this);
+    this.asteroids = new Asteroids(this);
+    this.pickups = new Pickups(this);
     this.player = new Player(this);
     this.hud = new Hud(this);
     this.gameOver  = new GameOver(this)
-    // this.enemies.addEnemies(2);
-    // this.enemies.addSweepingEnemies(1);
+    this.enemies.addEnemies(2);
+    this.enemies.addSweepingEnemies(1);
     this.enemies.addSideEnemies(2);
+    this.pickups.addExtraLife();
+    this.pickups.addPowerUp();
+    this.asteroids.addSlowAsteroids(4);
+    this.asteroids.addFastAsteroids(6);
   }
 
   reStart = () => {
@@ -77,6 +86,8 @@ export default class GameController {
     this.particleEmitters.tick(deltaTime)
     this.bullets.tick(deltaTime)
     this.enemies.tick(deltaTime)
+    this.asteroids.tick(deltaTime)
+    this.pickups.tick(deltaTime)
     this.player.tick(deltaTime)
     this.hud.tick(deltaTime)
     this.gameOver.tick(deltaTime)
@@ -88,6 +99,8 @@ export default class GameController {
     this.particleEmitters.render(ctx)
     this.bullets.render(ctx)
     this.enemies.render(ctx);
+    this.asteroids.render(ctx);
+    this.pickups.render(ctx);
     this.player.render(ctx)
     this.gameOver.render(ctx)
     this.hud.render(ctx)

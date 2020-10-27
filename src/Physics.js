@@ -50,6 +50,29 @@ export default class Physics {
     return collisionDetected;
   }
 
+  checkCollisionsWithFastAsteroids = (a) => { 
+    if(this.gameController.asteroids.fastAsteroids.length <= 0) return;
+    let collisionDetected = false;
+    this.gameController.asteroids.fastAsteroids.forEach((b) => {
+      if (this.hasCollided(a,b)) { 
+        collisionDetected = true;
+        this.gameController.asteroids.removeFastAsteroid(b.id)
+      }
+    })
+    return collisionDetected;
+  }
+
+  checkCollisionsWithSlowAsteroids = (a) => { 
+    if(this.gameController.asteroids.slowAsteroids.length <= 0) return;
+    let collisionDetected = false;
+    this.gameController.asteroids.slowAsteroids.forEach((b) => {
+      if (this.hasCollided(a,b)) { 
+        collisionDetected = true;
+        this.gameController.asteroids.removeSlowAsteroid(b.id)
+      }
+    })
+    return collisionDetected;
+  }
 
   checkCollisionsWithEnemies = (a) => {
     let collisionDetected = false;
@@ -63,10 +86,10 @@ export default class Physics {
 
   checkCollisionsWithPlayer = (a) => {
     let collisionDetected = false;
-    if (this.hasCollided(player,a)) { 
-      let collisionDetected = true;
+    if (this.hasCollided(this.gameController.player,a)) { 
+      collisionDetected = true;
     }
-    return 
+    return collisionDetected
   } 
 
   tick(deltaTime) {

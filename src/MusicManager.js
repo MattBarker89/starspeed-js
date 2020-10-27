@@ -9,7 +9,7 @@ export default class MusicManger {
   callback;
 
   constructor(){
-    this.musicEnabled = false;
+    this.musicEnabled = true;
   }
 
   onReady = (func) => {
@@ -68,7 +68,6 @@ export default class MusicManger {
     if (!this.musicEnabled) return;
     this.musicTracks.find((m) =>  m.name === 'game').audio.play(); 
   }
-
 
 }
 

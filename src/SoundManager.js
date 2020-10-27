@@ -114,6 +114,16 @@ export default class SoundManager {
     if (!this.soundEnabled) return;
     this.sounds.find((s) =>  s.name === 'menuActivate').audio.play();
   }
+
+  playPowerup = () => {
+    if (!this.soundEnabled) return;
+    this.sounds.find((s) =>  s.name === 'powerUp').audio.play();
+  }
+
+  playExtraLife = () => {
+    if (!this.soundEnabled) return;
+    this.sounds.find((s) =>  s.name === 'extraLife').audio.play();
+  }
   
 
 }
