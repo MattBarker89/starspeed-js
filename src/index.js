@@ -1,5 +1,5 @@
 import InputManager from './InputManager.js';
-import { SCREEN } from './constants.js'
+import { SCREEN, DEV } from './constants.js'
 import GameController from './GameController.js'
 import ResourceManager from './ResourceManager.js';
 import SoundManager from './SoundManager.js';
@@ -79,3 +79,8 @@ const click = () => {
 
 canvas.addEventListener('click', click, false);
 mouse.addEventListener('click',  click, false);
+
+if (DEV) {
+  mouse.classList.add('hidden');
+  start();
+}

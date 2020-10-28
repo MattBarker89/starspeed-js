@@ -8,6 +8,7 @@ export default class StateManager {
   gameState;
   score;
   highScores;
+  currentHighScores;
   playerlives;
 
   constructor() {
@@ -16,6 +17,7 @@ export default class StateManager {
     this.gameState = STATES.game.level1
     this.score = new Score();
     this.highScores = new HighScores();
+    this.currentHighScores = [];
     this.playerLives = 3;
   }
 
@@ -25,6 +27,7 @@ export default class StateManager {
     this.gameState = STATES.game.level1
     this.score = new Score();
     this.highScores = new HighScores();
+    this.currentHighScores = [];
     this.playerLives = 3;
   }
   

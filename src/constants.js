@@ -1,3 +1,5 @@
+export const DEV = true;
+
 export const SCREEN = Object.freeze({
   size: {
     width: 640,
@@ -91,15 +93,31 @@ export const STATES = Object.freeze({
 
 export const ROUNDS = Object.freeze([
   { enemy:2, sweepingEnemy:0, sideEnemy:0, slowAsteroid:0, fastAsteroid:0, powerUp: 0, extraLife:0 },
-  { enemy:3, sweepingEnemy:1, sideEnemy:1, slowAsteroid:0, fastAsteroid:0, powerUp: 0, extraLife:0 },
-  { enemy:3, sweepingEnemy:2, sideEnemy:2, slowAsteroid:0, fastAsteroid:1, powerUp: 0, extraLife:0 },
-  { enemy:4, sweepingEnemy:2, sideEnemy:0, slowAsteroid:1, fastAsteroid:0, powerUp: 1, extraLife:0 },
-  { enemy:4, sweepingEnemy:3, sideEnemy:0, slowAsteroid:1, fastAsteroid:0, powerUp: 0, extraLife:1 },
-  { enemy:4, sweepingEnemy:3, sideEnemy:1, slowAsteroid:0, fastAsteroid:2, powerUp: 0, extraLife:0 },
-  { enemy:4, sweepingEnemy:4, sideEnemy:2, slowAsteroid:1, fastAsteroid:1, powerUp: 1, extraLife:0 },
-  { enemy:4, sweepingEnemy:4, sideEnemy:0, slowAsteroid:2, fastAsteroid:2, powerUp: 0, extraLife:0 },
-  { enemy:5, sweepingEnemy:4, sideEnemy:2, slowAsteroid:2, fastAsteroid:2, powerUp: 1, extraLife:0 },
-  { enemy:6, sweepingEnemy:5, sideEnemy:0, slowAsteroid:6, fastAsteroid:8, powerUp: 0, extraLife:0 },
-  { enemy:6, sweepingEnemy:6, sideEnemy:2, slowAsteroid:8, fastAsteroid:12, powerUp: 0, extraLife:1 },
+  { enemy:1, sweepingEnemy:1, sideEnemy:0, slowAsteroid:0, fastAsteroid:0, powerUp: 0, extraLife:0 },
+  { enemy:2, sweepingEnemy:1, sideEnemy:0, slowAsteroid:0, fastAsteroid:1, powerUp: 0, extraLife:0 },
+  { enemy:1, sweepingEnemy:1, sideEnemy:0, slowAsteroid:1, fastAsteroid:0, powerUp: 1, extraLife:0 },
+  { enemy:1, sweepingEnemy:1, sideEnemy:1, slowAsteroid:0, fastAsteroid:0, powerUp: 0, extraLife:1 },
+  { enemy:1, sweepingEnemy:1, sideEnemy:2, slowAsteroid:0, fastAsteroid:0, powerUp: 0, extraLife:0 },
+  { enemy:1, sweepingEnemy:1, sideEnemy:0, slowAsteroid:2, fastAsteroid:0, powerUp: 1, extraLife:0 },
+  { enemy:2, sweepingEnemy:2, sideEnemy:0, slowAsteroid:2, fastAsteroid:2, powerUp: 0, extraLife:0 },
+  { enemy:2, sweepingEnemy:2, sideEnemy:2, slowAsteroid:2, fastAsteroid:2, powerUp: 1, extraLife:0 },
+  { enemy:2, sweepingEnemy:2, sideEnemy:2, slowAsteroid:4, fastAsteroid:2, powerUp: 0, extraLife:0 },
+  { enemy:3, sweepingEnemy:3, sideEnemy:0, slowAsteroid:8, fastAsteroid:12, powerUp: 0, extraLife:1 },
+  { enemy:4, sweepingEnemy:3, sideEnemy:1, slowAsteroid:2, fastAsteroid:3, powerUp: 0, extraLife:0 },
+  { enemy:4, sweepingEnemy:3, sideEnemy:2, slowAsteroid:2, fastAsteroid:4, powerUp: 0, extraLife:0 },
+  { enemy:4, sweepingEnemy:4, sideEnemy:2, slowAsteroid:4, fastAsteroid:4, powerUp: 1, extraLife:0 },
+  { enemy:5, sweepingEnemy:4, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 0, extraLife:0 },
+  { enemy:6, sweepingEnemy:5, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 0, extraLife:1 },
+  { enemy:6, sweepingEnemy:6, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 0, extraLife:0 },
+  { enemy:7, sweepingEnemy:6, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 0, extraLife:0 },
+  { enemy:7, sweepingEnemy:7, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 0, extraLife:0 },
+  { enemy:8, sweepingEnemy:7, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 1, extraLife:0 },
+  { enemy:9, sweepingEnemy:8, sideEnemy:2, slowAsteroid:6, fastAsteroid:6, powerUp: 0, extraLife:0 },
+  { enemy:9, sweepingEnemy:9, sideEnemy:2, slowAsteroid:6, fastAsteroid:7, powerUp: 0, extraLife:1 },
+  { enemy:10, sweepingEnemy:9, sideEnemy:2, slowAsteroid:7, fastAsteroid:7, powerUp: 0, extraLife:0 },
+  { enemy:10, sweepingEnemy:8, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 0, extraLife:0 },
+  { enemy:11, sweepingEnemy:10, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 0, extraLife:0 },
+  { enemy:13, sweepingEnemy:12, sideEnemy:2, slowAsteroid:8, fastAsteroid:9, powerUp: 1, extraLife:1 },
+  { enemy:15, sweepingEnemy:15, sideEnemy:2, slowAsteroid:9, fastAsteroid:9, powerUp: 0, extraLife:0 },
 ])
 

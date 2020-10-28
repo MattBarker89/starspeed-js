@@ -30,6 +30,8 @@ menu music Eric Skiff - A Night Of Dizzy Spells
 
 game music Vibe Mountain - Operatic 3
 
+
+Mouse icon
 <div>Icons made by <a href="https://www.flaticon.com/authors/smalllikeart" title="smalllikeart">smalllikeart</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 
@@ -38,3 +40,10 @@ game music Vibe Mountain - Operatic 3
  * Copyright 2015 Daniel Cardoso <@DanielCardoso>
  * Licensed under MIT
  */
+
+
+arrow keys icon
+ audio<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+
+

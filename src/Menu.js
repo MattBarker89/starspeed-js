@@ -1,10 +1,13 @@
 import GameObject from './GameObject.js'
 import { STATES, SCREEN } from './constants.js'
+import HighscoresTable from './HighscoresTable.js';
 export default class Menu extends GameObject {
 
   stateManager = window.stateManager;
   resourceManager = window.resourceManager;
   musicManger = window.musicManager;
+
+  highScoresTable
 
   playingMusic 
 
@@ -14,11 +17,12 @@ export default class Menu extends GameObject {
   logoXStart = -500;
   logoXFinish = 0 ;
   logoX = 0;
-  logoY= 64;
+  logoY = 64;
   nameFontSize = 14;
 
   constructor() {
     super();
+    this.highScoresTable = new HighscoresTable()
     this.logoX = this.logoXStart;
     this.startX = this.startXStart;
     this.highScoresX  = this.highScoresXStart;
@@ -40,6 +44,9 @@ export default class Menu extends GameObject {
 
   tick(deltaTime) {
     if (!this.correctState()) return;
+
+    this.highScoresTable.tick(deltaTime)
+
     this.startMusicIfNotPlaying();
 
     if (this.logoToggled && this.logoX < 80 ) this.logoX += this.flyInSpeed;
@@ -65,21 +72,19 @@ export default class Menu extends GameObject {
     ctx.drawImage(this.resourceManager.get('./logo.png'), this.logoX, this.logoY);
     ctx.font = "24px retrobound";
     ctx.fillStyle = "#f901a3";
-
-    //ctx.fillText("Start", this.startX + SCREEN.size.width / 2 - 64, this.startY );
-    // ctx.fillText("High Scores", this.highScoresX + SCREEN.size.width / 2 - 64, this.highScoresY );
-    // ctx.fillText("Options", this.optionsX  + SCREEN.size.width / 2 - 64, this.optionsY );
-    // ctx.fillText("Credits", this.creditsX + SCREEN.size.width / 2 - 64, this.creditsY );
-    if (this.logoX >= 80) ctx.fillText("START", 278,300)
+    if (this.logoX >= 80) ctx.fillText("START", 278,208)
     ctx.fillStyle = "WHITE";
-    if (this.logoX >= 80) ctx.fillText("OPTIONS", 264,350)
-    if (this.logoX >= 80) ctx.fillText("CREDITS", 264,400)
+    if (this.logoX >= 80) ctx.fillText("CONTROLS", 258,208 + 40)
+    if (this.logoX >= 80) ctx.fillText("CREDITS", 264,208 + 80)
     ctx.font = "18px retrobound";
-    if (this.logoX >= 80) ctx.fillText("BY MATT BARKER!", 242, 600);
+    if (this.logoX >= 80) ctx.fillText("BY MATT BARKER!", 242, 616);
+
+    if (this.logoX >= 80) this.highScoresTable.render(ctx);
 
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();
+
   }
 
   correctState() {

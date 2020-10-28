@@ -1,6 +1,9 @@
+import { DEV } from './constants.js'
 export default class HighScores {
 
-  highScores = []
+  stateManager = window.stateManager;
+  currentHighScores = []
+  hasHighscores = false;
 
   constructor() {
     return new Promise(async (resolve) => {
@@ -11,7 +14,12 @@ export default class HighScores {
   }
 
   getHighScores = async () => {
-    this.highScores = await (await fetch('http://localhost:3000/highscores')).json();
+    if (DEV) {
+      let response =  await fetch('http://localhost:3000/highscores');
+      let data = await response.json()
+      console.log(data);
+      window.stateManager.currentHighScores = data
+    }
   }
 
 

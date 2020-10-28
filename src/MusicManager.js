@@ -9,7 +9,7 @@ export default class MusicManger {
   callback;
 
   constructor(){
-    this.musicEnabled = true;
+    this.musicEnabled = false;
   }
 
   onReady = (func) => {
@@ -50,19 +50,23 @@ export default class MusicManger {
   playMenuMusic = () => {
     if (!this.musicEnabled) return;
     this.stopAllMusic();
-    this.musicTracks.find((m) =>  m.name === 'menu').audio.play();
-      
+    const music = this.musicTracks.find((m) =>  m.name === 'menu').audio;
+    music.play()
+    music.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
   }
 
   playGameMusic = () => {
     if (!this.musicEnabled) return;
     this.stopAllMusic();
-    this.musicTracks.find((m) =>  m.name === 'game').audio.play(); 
-    
-    // audioElement.addEventListener('ended', function() {
-    //     this.currentTime = 0;
-    //     this.play();
-    // }, false);
+    const music = this.musicTracks.find((m) =>  m.name === 'game').audio;
+    music.play()
+    music.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
   }
 
   pauseGameMusic = () => {
