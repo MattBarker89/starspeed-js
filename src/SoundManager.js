@@ -9,7 +9,7 @@ export default class SoundManager {
   callback;
 
   constructor(){
-    this.soundEnabled = false;
+    this.soundEnabled = true;
   }
 
   onReady = (func) => {
