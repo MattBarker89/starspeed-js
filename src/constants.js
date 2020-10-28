@@ -1,4 +1,4 @@
-export const DEV = true;
+export const DEV = false;
 
 export const SCREEN = Object.freeze({
   size: {
