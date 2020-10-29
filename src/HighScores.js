@@ -14,17 +14,16 @@ export default class HighScores {
   }
 
   getHighScores = async () => {
-    if (DEV) {
-      let response =  await fetch('http://localhost:3000/highscores');
+      let response =  await fetch('https://pure-castle-87739.herokuapp.com/highscores');
       let data = await response.json()
       console.log(data);
       window.stateManager.currentHighScores = data
-    }
   }
 
 
-  postHighScore = async () => {
-
+  postHighScore = async (name, highscore) => {
+    console.log(name);
+    console.log(highscore)
   }
 
 }

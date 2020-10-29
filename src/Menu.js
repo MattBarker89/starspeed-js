@@ -70,14 +70,14 @@ export default class Menu extends GameObject {
     ctx.fillStyle = "BLACK";
     ctx.beginPath();
     ctx.drawImage(this.resourceManager.get('./logo.png'), this.logoX, this.logoY);
-    ctx.font = "24px retrobound";
+    ctx.font = "18px arcade";
     ctx.fillStyle = "#f901a3";
     if (this.logoX >= 80) ctx.fillText("START", 278,208)
     ctx.fillStyle = "WHITE";
     if (this.logoX >= 80) ctx.fillText("CONTROLS", 258,208 + 40)
     if (this.logoX >= 80) ctx.fillText("CREDITS", 264,208 + 80)
-    ctx.font = "18px retrobound";
-    if (this.logoX >= 80) ctx.fillText("BY MATT BARKER!", 242, 616);
+    ctx.font = "18px arcade";
+    if (this.logoX >= 80) ctx.fillText("BY MATT BARKER!", 216, 616);
 
     if (this.logoX >= 80) this.highScoresTable.render(ctx);
 

@@ -24,13 +24,14 @@ export default class HighscoresTable extends GameObject {
     ctx.beginPath();
     ctx.strokeStyle = "#f901a3";
     //ctx.rect(64, 320, this.size.width, this.size.height);
-    ctx.font = "24px retrobound";
+    ctx.font = "16px arcade";
     ctx.fillStyle = "#36bbf5";
     ctx.fillText("HIGH SCORES", 248,360)
-
+    ctx.font = "16px arcade";
     
     this.stateManager.currentHighScores.forEach((score, index) => {
-      ctx.fillText(`${index +1 }: ${score.name}: ${score.score}`, 248, 360 + 42 + 42 * index)
+      const len = score.score.toString().length
+      ctx.fillText(`${index +1 }: ${score.name.toUpperCase()}: ${score.score}`, 264 - 2 * len, 360 + 42 + 42 * index)
     });
 
 

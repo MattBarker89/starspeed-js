@@ -6,6 +6,7 @@ import Enemies from './Enemies.js';
 import Asteroids from './Asteroids.js'
 import Hud from './Hud.js'
 import GameOver from './GameOver.js';
+import SaveHighScore from './SaveHighScore.js'
 import ParticleEmitter from './ParticleEmitter.js';
 import ParticleEmitters from './ParticleEmitters.js';
 import Pickups from './Pickups.js'
@@ -45,6 +46,7 @@ export default class GameController {
     this.player = new Player(this);
     this.hud = new Hud(this);
     this.gameOver  = new GameOver(this)
+    this.saveHighScore = new SaveHighScore(this)
   }
 
   reStart = () => {
@@ -57,6 +59,7 @@ export default class GameController {
     this.player = new Player(this);
     this.hud = new Hud(this);
     this.gameOver  = new GameOver(this)
+    //this.saveHighScore = new SaveHighScore(this)
     this.spawnNextRound();
   }
 
@@ -101,7 +104,9 @@ export default class GameController {
   }
 
   changeToGameOver = () => {
-    this.stateManager.gameState = STATES.game.gameOver
+    this.stateManager.gameState = STATES.game.gameOver;
+    this.stateManager.menuState = STATES.menu.savingHighScore;
+    this.stateManager.systemState = STATES.system.game;
   }
   
   loseLife = () => {
@@ -126,6 +131,7 @@ export default class GameController {
     this.player.tick(deltaTime)
     this.hud.tick(deltaTime)
     this.gameOver.tick(deltaTime)
+    this.saveHighScore.tick(deltaTime)
     this.checkForRespawn();
     this.checkForNextRound()
   }
@@ -139,6 +145,7 @@ export default class GameController {
     this.pickups.render(ctx);
     this.player.render(ctx)
     this.gameOver.render(ctx)
+    this.saveHighScore.render(ctx)
     this.hud.render(ctx)
   }
 

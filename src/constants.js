@@ -80,6 +80,7 @@ export const STATES = Object.freeze({
     main: 0,
     credits: 1,
     options: 2,
+    savingHighScore: 3
   },
   game:{
     level1: 0,
@@ -121,3 +122,7 @@ export const ROUNDS = Object.freeze([
   { enemy:15, sweepingEnemy:15, sideEnemy:2, slowAsteroid:9, fastAsteroid:9, powerUp: 0, extraLife:0 },
 ])
 
+export const ALPHABET = Object.freeze([
+  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 
+  'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', "Y", 'Z', "!",
+])

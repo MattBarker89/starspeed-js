@@ -37,7 +37,7 @@ body {
 
 
 body {
-    font-family: 'retrobound' ;
+    font-family: 'arcade' ;
 }
 
 #mouse {
@@ -356,6 +356,6 @@ body {
 }
 
 @font-face {
- font-family: 'retrobound';
- src: url('./retrobound.ttf');
+ font-family: 'arcade';
+ src: url('./arcade.ttf');
 }

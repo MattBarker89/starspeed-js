@@ -18,6 +18,8 @@ export default class InputManager {
   acknowledged = {
     up: false,
     down: false,
+    left: false,
+    right: false,
     enter: false,
     escape: false,
   } 
@@ -73,9 +75,11 @@ export default class InputManager {
       break;
       case KEYS.left:
         this.keyDowns.left = false;
+        this.acknowledged.left = false;
       break;
       case KEYS.right:
         this.keyDowns.right = false;
+        this.acknowledged.right = false;
       break;
       case KEYS.space:
         this.keyDowns.space = false; 
@@ -83,7 +87,7 @@ export default class InputManager {
       case KEYS.enter:
         this.keyDowns.enter = false;
         this.acknowledged.enter = false;
-          this.stateManager.systemState = STATES.system.game; 
+        this.stateManager.systemState = STATES.system.game; 
           break;
       case KEYS.escape:
           this.keyDowns.escape = false;

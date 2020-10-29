@@ -1,5 +1,5 @@
 import GameObject from './GameObject.js'
-import { STATES, SCREEN, DEV } from './constants.js'
+import { STATES, SCREEN, DEV, ALPHABET } from './constants.js'
 export default class GameOver extends GameObject {
 
   soundManager = window.soundManager;
@@ -7,66 +7,106 @@ export default class GameOver extends GameObject {
   resourceManager = window.resourceManager;
   inputManager = window.inputManager;
 
-  selectedOption = 0;
-  quitColor = "WHITE";
-  saveHighScoreColor = "WHITE";
+  name = ['A', 'B', 'C']
+  nameIndexes = [0, 0, 0];
+  alphabetIndex = 0;
+  selectedLetterIndex = 0;
 
-  constructor() {
+  gameController;
+
+  constructor(gameController) {
     super();
-    this.updateSelectedOption()
+    this.gameController = gameController
+  }
+
+  
+  increaseLetter = () => {
+    if(this.nameIndexes[this.selectedLetterIndex] + 1 <= ALPHABET.length - 1 ) {
+      this.nameIndexes[this.selectedLetterIndex] ++
+    } else {
+      this.nameIndexes[this.selectedLetterIndex] = 0
+    }
+    this.name[this.selectedLetterIndex] =  ALPHABET[this.nameIndexes[this.selectedLetterIndex]]
+  }
+
+  decreaseLetter = () => {
+    if(this.nameIndexes[this.selectedLetterIndex] - 1 > 0) {
+      this.nameIndexes[this.selectedLetterIndex] --
+    } else {
+      this.nameIndexes[this.selectedLetterIndex] = ALPHABET.length - 1
+    }
+    this.name[this.selectedLetterIndex] =  ALPHABET[this.nameIndexes[this.selectedLetterIndex]]
+  }
+
+  increaseIndex = () => {
+    this.selectedLetterIndex++ 
+    if (this.selectedLetterIndex > this.nameIndexes.length -1 ) this.selectedLetterIndex = 0;
+  }
+
+  decreaseIndex = () => {
+    this.selectedLetterIndex-- 
+    if (this.selectedLetterIndex < 0  ) this.selectedLetterIndex = this.nameIndexes.length - 1;
+  }
+
+  submitHighScore = () => {
+    console.log(this.stateManager)
+    fetch('https://pure-castle-87739.herokuapp.com/highscore', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({
+        name: this.name.join(''),
+        score: this.stateManager.score.currentScore
+      })
+    }).then(() => {
+        window.location.reload()
+      });
+  }
+
+  checkUpKey = () => {
+    if(this.inputManager.keyDowns.up && !this.inputManager.acknowledged.up) {
+      this.inputManager.acknowledged.up = true;
+      this.increaseLetter();
+    }
+  }
+
+  checkDownKey = () => {
+    if(this.inputManager.keyDowns.down && !this.inputManager.acknowledged.down) {
+      this.inputManager.acknowledged.down = true;
+      this.decreaseLetter();
+    }
+  }
+
+  checkLeftKey = () => {
+    if(this.inputManager.keyDowns.left && !this.inputManager.acknowledged.left) {
+      this.inputManager.acknowledged.left = true;
+      this.decreaseIndex();
+    }
+  }
+
+  checkRightKey = () => {
+    if(this.inputManager.keyDowns.right && !this.inputManager.acknowledged.right) {
+      this.inputManager.acknowledged.right = true;
+      this.increaseIndex();
+    }
+  }
+
+  checkEnterKey = () => {
+    if(this.inputManager.keyDowns.enter && !this.inputManager.acknowledged.enter) {
+      this.inputManager.acknowledged.enter = true;
+      this.submitHighScore();
+    }
   }
 
   tick(deltaTime) {
     if (!this.correctState()) return;
-    this.checkSelectionChange();
-    this.checkActivate();
-  }
-
-  checkActivate = () => {
-    if(this.inputManager.keyDowns.enter && !this.inputManager.acknowledged.enter) {
-      this.inputManager.acknowledged.enter = true;
-      this.soundManager.playMenuActivate();
-    }
-  }
-
-  checkSelectionChange = () => {
-    if (this.inputManager.keyDowns.down && !this.inputManager.acknowledged.down) {
-      this.inputManager.acknowledged.down = true;
-      this.increaseSelectedOption();
-    }else if (this.inputManager.keyDowns.up && !this.inputManager.acknowledged.up) {
-      this.inputManager.acknowledged.up = true;
-      this.decreaseSelectedOption();
-    } 
-  }
-
-  updateSelectedOption = () => {
-    if (this.selectedOption === 0) {
-      this.quitColor = "#f901a3"
-      this.saveHighScoreColor = "WHITE"
-    } else if (this.selectedOption === 1) {
-      this.quitColor = "WHITE"
-      this.saveHighScoreColor = "#f901a3"
-    }  
-  }
-
-  increaseSelectedOption = () => {
-    if (this.selectedOption === 0) {
-      this.selectedOption = 1
-      this.updateSelectedOption();
-    } else if (this.selectedOption === 1) {
-      this.selectedOption = 0;
-      this.updateSelectedOption();
-    } 
-  }
-
-  decreaseSelectedOption = () => {
-    if (this.selectedOption === 0) {
-      this.selectedOption = 1
-      this.updateSelectedOption();
-    } else if (this.selectedOption === 1) {
-      this.selectedOption = 0;
-      this.updateSelectedOption();
-    }
+    this.checkUpKey();
+    this.checkDownKey();
+    this.checkLeftKey();
+    this.checkRightKey();
+    this.checkEnterKey();
   }
 
   render(ctx) {
@@ -74,15 +114,23 @@ export default class GameOver extends GameObject {
     ctx.fillStyle = "BLACK";
     ctx.beginPath();
     ctx.fillRect(0, 0, SCREEN.size.width, SCREEN.size.height);
+    ctx.font = "32px arcade";
 
-    ctx.font = "32px retrobound";
+    ctx.fillStyle = "#36bbf5";
+    ctx.fillText(`SCORE: ${this.stateManager.score.currentScore}`, 248,256)
+
+    this.name.forEach((letter, index) => {
+      if (index === this.selectedLetterIndex) {
+        ctx.fillStyle = "#36bbf5";
+      } else {
+        ctx.fillStyle = "WHITE";
+      }
+      ctx.fillText(`${letter}`, 286 + 32 * index + 1 , 312);
+    })
+
     ctx.fillStyle = "WHITE";
-    ctx.fillText("GAME OVER", 242,200)
-    ctx.fillStyle = this.quitColor;
-    ctx.font = "24px retrobound";
-    ctx.fillText("QUIT", 286,310)
-    ctx.fillStyle = this.saveHighScoreColor;
-    ctx.fillText("SAVE HIGHSCORE", 225,360)
+    ctx.fillText('[ENTER] TO SAVE' , 162, 412);
+
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();
@@ -91,7 +139,8 @@ export default class GameOver extends GameObject {
   correctState() {
     return (
       this.stateManager.systemState == STATES.system.game && 
-      this.stateManager.gameState === STATES.game.gameOver
+      this.stateManager.gameState === STATES.game.gameOver &&
+      this.stateManager.menuState === STATES.menu.savingHighScore
       )
   }
 

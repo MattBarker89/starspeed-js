@@ -18,7 +18,7 @@ export default class StateManager {
     this.score = new Score();
     this.highScores = new HighScores();
     this.currentHighScores = [];
-    this.playerLives = 3;
+    this.playerLives = 1;
   }
 
   resetStates = () => {

@@ -11,6 +11,8 @@ export default class GameOver extends GameObject {
   quitColor = "WHITE";
   saveHighScoreColor = "WHITE";
 
+  savingHighScore = false;
+
   constructor() {
     super();
     this.updateSelectedOption()
@@ -69,32 +71,33 @@ export default class GameOver extends GameObject {
       this.selectedOption = 0;
       this.updateSelectedOption();
     }
- 
   }
 
   render(ctx) {
     if (!this.correctState()) return;
-    ctx.fillStyle = "BLACK";
-    ctx.beginPath();
-    ctx.fillRect(0, 0, SCREEN.size.width, SCREEN.size.height);
-
-    ctx.font = "32px retrobound";
-    ctx.fillStyle = "WHITE";
-    ctx.fillText("GAME OVER", 242,200)
-    ctx.fillStyle = this.quitColor;
-    ctx.font = "24px retrobound";
-    ctx.fillText("QUIT", 286,310)
-    ctx.fillStyle = this.saveHighScoreColor;
-    ctx.fillText("SAVE HIGHSCORE", 225,360)
-    ctx.beginPath();
-    ctx.fill();
-    ctx.stroke();
+      ctx.fillStyle = "BLACK";
+      ctx.beginPath();
+      ctx.fillRect(0, 0, SCREEN.size.width, SCREEN.size.height);
+      ctx.font = "32px arcade";
+      ctx.fillStyle = "WHITE";
+      ctx.fillText("GAME OVER", 212,200)
+      ctx.font = "24px arcade";
+      ctx.fillStyle = "#36bbf5";
+      ctx.fillText(`SCORE: ${this.stateManager.score.currentScore}`, 248,332)
+      ctx.fillStyle = this.quitColor;
+      ctx.fillText("QUIT", 286,474)
+      ctx.fillStyle = this.saveHighScoreColor;
+      ctx.fillText("SAVE HIGHSCORE", 200,524)
+      ctx.beginPath();
+      ctx.fill();
+      ctx.stroke();
   }
 
   correctState() {
     return (
       this.stateManager.systemState == STATES.system.game && 
-      this.stateManager.gameState === STATES.game.gameOver
+      this.stateManager.gameState === STATES.game.gameOver &&
+      !this.stateManager.menuState === STATES.menu.savingHighScore
       )
   }
 
