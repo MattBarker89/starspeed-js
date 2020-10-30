@@ -12,7 +12,7 @@ export default class StateManager {
   playerlives;
 
   constructor() {
-    this.systemState = STATES.system.game
+    this.systemState = STATES.system.menu
     this.menuState = STATES.menu.main
     this.gameState = STATES.game.level1
     this.score = new Score();
