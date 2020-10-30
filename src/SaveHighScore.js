@@ -117,7 +117,7 @@ export default class GameOver extends GameObject {
     ctx.font = "32px arcade";
 
     ctx.fillStyle = "#36bbf5";
-    ctx.fillText(`SCORE: ${this.stateManager.score.currentScore}`, 248,256)
+    ctx.fillText(`SCORE: ${this.stateManager.score.currentScore}`, 32,64)
 
     this.name.forEach((letter, index) => {
       if (index === this.selectedLetterIndex) {
