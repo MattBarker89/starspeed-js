@@ -17,7 +17,7 @@ export default class SlowAsteroid extends GameObject {
     this.size.height = 32;  
     this.pos.x = randomIntBetween(0, SCREEN.size.width - this.size.width) 
     this.pos.y = 0 - randomIntBetween(this.size.height, 10240);
-    this.speed = randomIntBetween(6,12);
+    this.speed = randomIntBetween(4,8);
     this.id = uuid();
     this.gameController = gameController
   }

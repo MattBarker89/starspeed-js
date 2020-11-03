@@ -30,7 +30,7 @@ export default class Enemy extends GameObject{
     height: 64,
   }
 
-  startYPos = -this.size.height * 20 ;
+  startYPos = -this.size.height * 10 ;
   pos = {
     x: 100,
     y:100,

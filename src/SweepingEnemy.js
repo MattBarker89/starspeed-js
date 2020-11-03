@@ -31,7 +31,7 @@ export default class SweepingEnemy extends GameObject{
     height: 64,
   }
 
-  startYPos = - this.size.height * randomIntBetween(20, 40) ;
+  startYPos = - this.size.height * randomIntBetween(10, 20) ;
   pos = {
     x: 100,
     y:100,

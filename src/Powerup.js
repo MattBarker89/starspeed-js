@@ -13,7 +13,7 @@ export default class PowerUp extends GameObject{
   speed = 2;
   id;
 
-  powerUpTime = 512
+  powerUpTime = 60 * 20
 
   size = {
     width: 32,
