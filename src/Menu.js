@@ -72,10 +72,10 @@ export default class Menu extends GameObject {
     ctx.drawImage(this.resourceManager.get('./logo.png'), this.logoX, this.logoY);
     ctx.font = "18px arcade";
     ctx.fillStyle = "#f901a3";
-    if (this.logoX >= 80) ctx.fillText("START", 278,208)
+    if (this.logoX >= 80) ctx.fillText("[ENTER] TO START", 228,208)
     ctx.fillStyle = "WHITE";
-    if (this.logoX >= 80) ctx.fillText("CONTROLS", 258,208 + 40)
-    if (this.logoX >= 80) ctx.fillText("CREDITS", 264,208 + 80)
+    // if (this.logoX >= 80) ctx.fillText("CONTROLS", 258,208 + 40)
+    // if (this.logoX >= 80) ctx.fillText("CREDITS", 264,208 + 80)
     ctx.font = "18px arcade";
     if (this.logoX >= 80) ctx.fillText("BY MATT BARKER!", 216, 616);
 

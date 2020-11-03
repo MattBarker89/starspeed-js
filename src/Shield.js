@@ -12,7 +12,7 @@ export default class Shield extends GameObject {
 
   shieldUp = false;
   shieldPoweringUp = false;
-  shieldPowerUpDelay = 6
+  shieldPowerUpDelay = 3
   sheildPowerUpCounter = 0;
 
   //4 //8 //16

@@ -111,7 +111,7 @@ export const ROUNDS = Object.freeze([
   { enemy:6, sweepingEnemy:5, sideEnemy:2, slowAsteroid:3, fastAsteroid:3, powerUp: 0, extraLife:1 },
   { enemy:6, sweepingEnemy:6, sideEnemy:2, slowAsteroid:3, fastAsteroid:3, powerUp: 0, extraLife:0 },
   { enemy:7, sweepingEnemy:6, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 0, extraLife:0 },
-  { enemy:7, sweepingEnemy:7, sideEnemy:2, slowAsteroid:3, fastAsteroid:5, powerUp: 0, extraLife:0 },
+  { enemy:7, sweepingEnemy:7, sideEnemy:2, slowAsteroid:3, fastAsteroid:6, powerUp: 0, extraLife:0 },
   { enemy:8, sweepingEnemy:7, sideEnemy:2, slowAsteroid:5, fastAsteroid:6, powerUp: 1, extraLife:0 },
   { enemy:9, sweepingEnemy:8, sideEnemy:2, slowAsteroid:6, fastAsteroid:6, powerUp: 0, extraLife:0 },
   { enemy:9, sweepingEnemy:9, sideEnemy:2, slowAsteroid:6, fastAsteroid:7, powerUp: 0, extraLife:1 },
