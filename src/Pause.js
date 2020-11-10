@@ -47,8 +47,7 @@ export default class Pause extends GameObject {
     ctx.fillStyle = "WHITE";
     ctx.fillText("GAME PAUSED", 232 - 40,200)
     ctx.font = "24px arcade";
-    ctx.fillText("RESUME", 280 -26 ,310)
-    ctx.fillText("QUIT", 290 - 12,360)
+    ctx.fillText("[ESC] TO RESUME", 232 -30 ,310)
     ctx.beginPath();
     ctx.fill();
     ctx.stroke();

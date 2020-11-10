@@ -34,7 +34,6 @@ export default class HighscoresTable extends GameObject {
       ctx.fillText(`${index +1 }: ${score.name.toUpperCase()}: ${score.score}`, 264 - 2 * len, 360 + 42 + 42 * index)
     });
 
-
     ctx.stroke();
   }
 
