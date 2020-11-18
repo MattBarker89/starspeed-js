@@ -1,13 +1,12 @@
-import GameObject from './GameObject.js'
-import { STATES, SCREEN, DEV, ALPHABET } from './constants.js'
+import GameObject from "./GameObject.js";
+import { STATES, SCREEN, DEV, ALPHABET } from "./constants.js";
 export default class GameOver extends GameObject {
-
   soundManager = window.soundManager;
   stateManager = window.stateManager;
   resourceManager = window.resourceManager;
   inputManager = window.inputManager;
 
-  name = ['A', 'B', 'C']
+  name = ["A", "B", "C"];
   nameIndexes = [0, 0, 0];
   alphabetIndex = 0;
   selectedLetterIndex = 0;
@@ -16,89 +15,106 @@ export default class GameOver extends GameObject {
 
   constructor(gameController) {
     super();
-    this.gameController = gameController
+    this.gameController = gameController;
   }
 
-  
   increaseLetter = () => {
-    if(this.nameIndexes[this.selectedLetterIndex] + 1 <= ALPHABET.length - 1 ) {
-      this.nameIndexes[this.selectedLetterIndex] ++
+    if (this.nameIndexes[this.selectedLetterIndex] + 1 <= ALPHABET.length - 1) {
+      this.nameIndexes[this.selectedLetterIndex]++;
     } else {
-      this.nameIndexes[this.selectedLetterIndex] = 0
+      this.nameIndexes[this.selectedLetterIndex] = 0;
     }
-    this.name[this.selectedLetterIndex] =  ALPHABET[this.nameIndexes[this.selectedLetterIndex]]
-  }
+    this.name[this.selectedLetterIndex] =
+      ALPHABET[this.nameIndexes[this.selectedLetterIndex]];
+  };
 
   decreaseLetter = () => {
-    if(this.nameIndexes[this.selectedLetterIndex] - 1 > 0) {
-      this.nameIndexes[this.selectedLetterIndex] --
+    if (this.nameIndexes[this.selectedLetterIndex] - 1 > 0) {
+      this.nameIndexes[this.selectedLetterIndex]--;
     } else {
-      this.nameIndexes[this.selectedLetterIndex] = ALPHABET.length - 1
+      this.nameIndexes[this.selectedLetterIndex] = ALPHABET.length - 1;
     }
-    this.name[this.selectedLetterIndex] =  ALPHABET[this.nameIndexes[this.selectedLetterIndex]]
-  }
+    this.name[this.selectedLetterIndex] =
+      ALPHABET[this.nameIndexes[this.selectedLetterIndex]];
+  };
 
   increaseIndex = () => {
-    this.selectedLetterIndex++ 
-    if (this.selectedLetterIndex > this.nameIndexes.length -1 ) this.selectedLetterIndex = 0;
-  }
+    this.selectedLetterIndex++;
+    if (this.selectedLetterIndex > this.nameIndexes.length - 1)
+      this.selectedLetterIndex = 0;
+  };
 
   decreaseIndex = () => {
-    this.selectedLetterIndex-- 
-    if (this.selectedLetterIndex < 0  ) this.selectedLetterIndex = this.nameIndexes.length - 1;
-  }
+    this.selectedLetterIndex--;
+    if (this.selectedLetterIndex < 0)
+      this.selectedLetterIndex = this.nameIndexes.length - 1;
+  };
 
   submitHighScore = () => {
-    console.log(this.stateManager)
-    fetch('https://pure-castle-87739.herokuapp.com/highscore', {
-      method: 'post',
+    this.stateManager.savingHighScore = true;
+    fetch("https://pure-castle-87739.herokuapp.com/highscore", {
+      method: "post",
       headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
       },
-      body:JSON.stringify({
-        name: this.name.join(''),
-        score: this.stateManager.score.currentScore
-      })
+      body: JSON.stringify({
+        name: this.name.join(""),
+        score: this.stateManager.score.currentScore,
+      }),
     }).then(() => {
-        window.location.reload()
-      });
-  }
+      this.stateManager.savingHighScore = false;
+      window.location.reload();
+    });
+  };
 
   checkUpKey = () => {
-    if(this.inputManager.keyDowns.up && !this.inputManager.acknowledged.up) {
+    if (this.inputManager.keyDowns.up && !this.inputManager.acknowledged.up) {
       this.inputManager.acknowledged.up = true;
       this.increaseLetter();
     }
-  }
+  };
 
   checkDownKey = () => {
-    if(this.inputManager.keyDowns.down && !this.inputManager.acknowledged.down) {
+    if (
+      this.inputManager.keyDowns.down &&
+      !this.inputManager.acknowledged.down
+    ) {
       this.inputManager.acknowledged.down = true;
       this.decreaseLetter();
     }
-  }
+  };
 
   checkLeftKey = () => {
-    if(this.inputManager.keyDowns.left && !this.inputManager.acknowledged.left) {
+    if (
+      this.inputManager.keyDowns.left &&
+      !this.inputManager.acknowledged.left
+    ) {
       this.inputManager.acknowledged.left = true;
       this.decreaseIndex();
     }
-  }
+  };
 
   checkRightKey = () => {
-    if(this.inputManager.keyDowns.right && !this.inputManager.acknowledged.right) {
+    if (
+      this.inputManager.keyDowns.right &&
+      !this.inputManager.acknowledged.right
+    ) {
       this.inputManager.acknowledged.right = true;
       this.increaseIndex();
     }
-  }
+  };
 
   checkEnterKey = () => {
-    if(this.inputManager.keyDowns.enter && !this.inputManager.acknowledged.enter) {
+    if (
+      this.inputManager.keyDowns.enter &&
+      !this.inputManager.acknowledged.enter
+    ) {
       this.inputManager.acknowledged.enter = true;
+      if (this.stateManager.savingHighScore) return;
       this.submitHighScore();
     }
-  }
+  };
 
   tick(deltaTime) {
     if (!this.correctState()) return;
@@ -117,7 +133,7 @@ export default class GameOver extends GameObject {
     ctx.font = "32px arcade";
 
     ctx.fillStyle = "#36bbf5";
-    ctx.fillText(`SCORE: ${this.stateManager.score.currentScore}`, 32,64)
+    ctx.fillText(`SCORE: ${this.stateManager.score.currentScore}`, 32, 64);
 
     this.name.forEach((letter, index) => {
       if (index === this.selectedLetterIndex) {
@@ -125,11 +141,15 @@ export default class GameOver extends GameObject {
       } else {
         ctx.fillStyle = "WHITE";
       }
-      ctx.fillText(`${letter}`, 286 + 32 * index + 1 , 312);
-    })
+      ctx.fillText(`${letter}`, 286 + 32 * index + 1, 312);
+    });
 
     ctx.fillStyle = "WHITE";
-    ctx.fillText('[ENTER] TO SAVE' , 162, 412);
+    if (this.stateManager.savingHighScore) {
+      ctx.fillText("SAVING, PLEASE WAIT", 116, 412);
+    } else {
+      ctx.fillText("[ENTER] TO SAVE", 162, 412);
+    }
 
     ctx.beginPath();
     ctx.fill();
@@ -138,10 +158,9 @@ export default class GameOver extends GameObject {
 
   correctState() {
     return (
-      this.stateManager.systemState == STATES.system.game && 
+      this.stateManager.systemState == STATES.system.game &&
       this.stateManager.gameState === STATES.game.gameOver &&
       this.stateManager.menuState === STATES.menu.savingHighScore
-      )
+    );
   }
-
 }
